@@ -89,6 +89,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .project-card:hover {
@@ -107,14 +108,17 @@
             overflow: hidden;
         }
 
-        /* Placeholder for actual images */
         .project-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        /* Placeholder icon when no image */
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
         .project-image .placeholder {
             font-size: 4rem;
             color: #bbb;
@@ -175,40 +179,209 @@
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
 
-        /* Featured Project */
-        .featured-project {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .featured-badge {
-            display: inline-block;
-            padding: 6px 15px;
-            background: var(--accent);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-        }
-
-        .featured-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+        .view-gallery-btn {
+            display: inline-flex;
             align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 600;
         }
 
-        .featured-image {
+        .view-gallery-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Modal Gallery */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
             width: 100%;
-            height: 300px;
-            background: var(--light);
-            border-radius: 10px;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal-header {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            color: white;
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--accent);
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background: var(--light);
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 10px;
+            font-size: 0.9rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .image-caption {
+            transform: translateY(0);
+        }
+
+        /* Lightbox for full image view */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.98);
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .lightbox-content img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px;
+            transition: color 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-arrow:hover {
+            color: var(--secondary);
+        }
+
+        .nav-arrow.prev {
+            left: 20px;
+        }
+
+        .nav-arrow.next {
+            right: 20px;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         /* Footer */
@@ -235,8 +408,12 @@
                 grid-template-columns: 1fr;
             }
 
-            .featured-content {
+            .gallery-container {
                 grid-template-columns: 1fr;
+            }
+
+            .nav-arrow {
+                font-size: 2rem;
             }
         }
     </style>
@@ -245,7 +422,7 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <h1>My Projects (Yet to be Developed)</h1>
+                <h1>My Projects</h1>
                 <a href="index.html" class="back-btn">
                     <i class="fas fa-arrow-left"></i>
                     Back to Portfolio
@@ -253,10 +430,288 @@
             </div>
         </div>
     </header>
+
+    <main class="projects-container">
+        <div class="container">
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Gallery -->
+    <div id="galleryModal" class="modal">
+        <span class="close" onclick="closeGallery()">&times;</span>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalProjectTitle"></h2>
+            </div>
+            <div class="gallery-container" id="galleryContainer">
+                <!-- Gallery images will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox for full image view -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="nav-arrow prev" onclick="navigateImage(-1)">&#10094;</span>
+        <span class="nav-arrow next" onclick="navigateImage(1)">&#10095;</span>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="">
+        </div>
+    </div>
+
     <footer>
         <div class="container">
-            <p>&copy; 2025 Harshvardan</p>
+            <p>&copy; 2024 Your Name. All projects are available on GitHub.</p>
         </div>
     </footer>
+
+    <script>
+        // Project Data Configuration
+        // Update this array with your actual projects
+        const projects = [
+            {
+                id: 'project1',
+                title: 'AI Powered Task Management System',
+                folder: 'Task Management System',
+                technologies: ['Python', 'Jupyter (EDA)', 'Data Engineering','Data Analysis', 'Machine Learning', 'Data Science', 'Stream-lit Web Dashboard','NLP'],
+                description: 'Developed an AI-powered Task Management System that predicts task priority and category from simple, natural-language descriptions.',
+                githubLink: 'https://github.com/Harsh-D14/AI-Powered-Task-Management-System',
+                liveLink: '#',
+                images: [
+                    'image1.jpg',
+                    'image2.jpg',
+                    'image3.jpg',
+                    'image4.jpg'
+                ]
+            },
+            {
+                id: 'project2',
+                title: 'Personalized Product Recommendation System',
+                folder: 'Product Recommendation System',
+                technologies: ['Python', 'NLTK', 'Machine Learning', 'Data Analysis', 'Data Visualization', 'Recommendation Engine and Systems'],
+                description: 'Developed a machine learning-based recommendation engine that provides product suggestions to users based on historical interactions, behavior, and user-item metadata.',
+                githubLink: 'https://github.com/Harsh-D14/Personalized-Recommendation-System',
+                liveLink: '#',
+                images: [
+                    'image1.jpg',
+                    'image2.jpg',
+                    'image3.jpg'
+                ]
+            },
+            {
+                id: 'project3',
+                title: 'IoT-based toy for the Specially Abled',
+                folder: 'Project3',
+                technologies: ['NodeJS', 'JavaScript', 'NodeMCU', 'Web UI/UX Development', 'Front-End Development', 'IoT and sensors'],
+                description: 'Optimized complex SQL queries reducing execution time by 70%. Implemented indexing strategies and query optimization techniques.',
+                githubLink: null,
+                liveLink: '#',
+                images: [
+                ]
+            },
+            {
+                id: 'project4',
+                title: 'Contactless Elevator',
+                folder: 'Project4',
+                technologies: ['Python', 'Raspberry Pi', 'IoT', 'C++', 'Arduino', 'ADC'],
+                description: 'Developed a convolutional neural network for multi-class image classification. Achieved 94% accuracy on test dataset.',
+                githubLink: 'https://github.com/yourusername/project4',
+                liveLink: '#',
+                images: [
+                    'image1.jpg',
+                    'image2.jpg',
+                    'image3.jpg',
+                    'image4.jpg',
+                    'image5.jpg'
+                ]
+            },
+            {
+                id: 'project5',
+                title: 'Covid-19 Assisstance Mobile Application',
+                folder: 'Project5',
+                technologies: ['Mobile App Development', 'Android Studio', 'Figma', 'UI/UX'],
+                description: 'Created an interactive sales dashboard using R Shiny for real-time business insights and KPI tracking.',
+                githubLink: 'https://github.com/yourusername/project5',
+                liveLink: '#',
+                images: [
+                    'image1.jpg',
+                    'image2.jpg',
+                    'image3.jpg'
+                ]
+            },
+            {
+                id: 'project6',
+                title: 'Sidewalk Delivery Drone with Centralized Framework using IoT and Image Processing',
+                folder: 'Sidewalk Delivery Drone',
+                technologies: ['C++', 'Python', 'NAViC Navigation', 'IoT', 'Arduino', 'Raspberry Pi', 'OpenCV', 'UltraSonic Sensors', 'Web Application', 'Firebase DB'],
+                description: 'Developed an Unmanned Ground Vehicle for campus cargo transport providing the ability to switch from conventional ICE vehicles to smaller electric delivery drones/vehicles',
+                githubLink: 'https://github.com/',
+                liveLink: '#',
+                images: [
+                    'image1.jpeg',
+                    'image2.jpeg',
+                ]
+            }
+        ];
+
+        let currentProject = null;
+        let currentImageIndex = 0;
+        let currentImages = [];
+
+        // Load projects on page load
+        document.addEventListener('DOMContentLoaded', loadProjects);
+
+        function loadProjects() {
+            const projectsGrid = document.getElementById('projectsGrid');
+            
+            projects.forEach(project => {
+                const projectCard = createProjectCard(project);
+                projectsGrid.appendChild(projectCard);
+            });
+        }
+
+        function createProjectCard(project) {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            
+            // Create thumbnail path
+            const thumbnailPath = `${project.folder}/thumbnail.jpg`;
+            
+            card.innerHTML = `
+                <div class="project-image">
+                    <img src="${thumbnailPath}" 
+                         alt="${project.title}" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                         onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
+                    <i class="fas fa-folder-open placeholder" style="display:none;"></i>
+                </div>
+                <div class="project-content">
+                    <h3>${project.title}</h3>
+                    <div class="project-tech">
+                        ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-links">
+                        <a href="${project.githubLink}" target="_blank" class="project-link" onclick="event.stopPropagation()">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                        ${project.liveLink !== '#' ? `
+                        <a href="${project.liveLink}" target="_blank" class="project-link" onclick="event.stopPropagation()">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>` : ''}
+                        <button class="view-gallery-btn" onclick="event.stopPropagation(); openGallery('${project.id}')">
+                            <i class="fas fa-images"></i>
+                            View Gallery
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Add click event to open gallery
+            card.addEventListener('click', () => openGallery(project.id));
+            
+            return card;
+        }
+
+        function openGallery(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) return;
+            
+            currentProject = project;
+            currentImages = project.images;
+            
+            const modal = document.getElementById('galleryModal');
+            const modalTitle = document.getElementById('modalProjectTitle');
+            const galleryContainer = document.getElementById('galleryContainer');
+            
+            modalTitle.textContent = project.title;
+            galleryContainer.innerHTML = '';
+            
+            // Load gallery images
+            project.images.forEach((image, index) => {
+                const imagePath = `${project.folder}/${image}`;
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.innerHTML = `
+                    <img src="${imagePath}" 
+                         alt="${project.title} - Image ${index + 1}"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"225\" viewBox=\"0 0 400 225\"%3E%3Crect fill=\"%23ddd\" width=\"400\" height=\"225\"/%3E%3Ctext fill=\"%23999\" font-family=\"sans-serif\" font-size=\"20\" x=\"50%25\" y=\"50%25\" text-anchor=\"middle\" dominant-baseline=\"middle\"%3EImage ${index + 1}%3C/text%3E%3C/svg%3E'">
+                    <div class="image-caption">Image ${index + 1}</div>
+                `;
+                galleryItem.onclick = () => openLightbox(index);
+                galleryContainer.appendChild(galleryItem);
+            });
+            
+            modal.classList.add('active');
+        }
+
+        function closeGallery() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('active');
+        }
+
+        function openLightbox(index) {
+            if (!currentProject) return;
+            
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            
+            const imagePath = `${currentProject.folder}/${currentImages[index]}`;
+            lightboxImage.src = imagePath;
+            lightboxImage.alt = `${currentProject.title} - Image ${index + 1}`;
+            
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+
+        function navigateImage(direction) {
+            currentImageIndex += direction;
+            
+            if (currentImageIndex < 0) {
+                currentImageIndex = currentImages.length - 1;
+            } else if (currentImageIndex >= currentImages.length) {
+                currentImageIndex = 0;
+            }
+            
+            openLightbox(currentImageIndex);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const galleryModal = document.getElementById('galleryModal');
+            const lightbox = document.getElementById('lightbox');
+            
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') navigateImage(-1);
+                if (e.key === 'ArrowRight') navigateImage(1);
+                if (e.key === 'Escape') closeLightbox();
+            } else if (galleryModal.classList.contains('active')) {
+                if (e.key === 'Escape') closeGallery();
+            }
+        });
+
+        // Close modals when clicking outside
+        window.onclick = (event) => {
+            const galleryModal = document.getElementById('galleryModal');
+            const lightbox = document.getElementById('lightbox');
+            
+            if (event.target === galleryModal) {
+                closeGallery();
+            }
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        };
+    </script>
 </body>
 </html>
