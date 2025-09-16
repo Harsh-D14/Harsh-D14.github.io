@@ -452,40 +452,6 @@
         .chart-wrapper {
             position: relative;
             height: 300px;
-            padding: 10px;
-            background: linear-gradient(145deg, #ffffff, #f5f5f5);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .chart-wrapper:hover {
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            transform: translateY(-5px);
-        }
-
-        /* Loading animation for charts */
-        @keyframes pulse {
-            0% {
-                opacity: 0.6;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0.6;
-            }
-        }
-
-        /* .chart-wrapper canvas {
-            animation: pulse 1.5s ease-in-out infinite;
-        } */
-        .chart-wrapper canvas {
-            animation: none;
-        }
-
-        .chart-wrapper canvas.loaded {
-            animation: none;
         }
 
         /* Adaptability Section */
