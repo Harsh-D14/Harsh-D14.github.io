@@ -493,7 +493,13 @@
             background: var(--dark);
             color: white;
         }
+        .chart-wrapper canvas {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
 
+        .chart-wrapper canvas.loaded {
+            animation: none;
+        }
         /* Animations */
         @keyframes fadeInDown {
             from {
