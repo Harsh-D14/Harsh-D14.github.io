@@ -43,6 +43,7 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             position: relative;
+            overflow: hidden;
         }
 
         .header-content {
@@ -50,25 +51,107 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 200px;
         }
 
+        /* 
+        * LinkedIn Badge Styling Options - Choose One:
+        * 
+        * Option 1: Clean Floating (Current - No Border)
+        * - Minimal, professional look
+        * - Subtle drop shadow only
+        * - Blends with gradient background
+        */
+        .linkedin-badge-container {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            opacity: 0.95;
+            animation: slideInLeft 1s ease;
+        }
+
+        /* 
+        * Option 2: Subtle Glass Card (Uncomment to use)
+        * - Very subtle glassmorphism
+        * - Matches header gradient
+        */
+        /*
+        .linkedin-badge-container {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            padding: 12px;
+            background: linear-gradient(135deg, 
+                rgba(102, 126, 234, 0.1) 0%, 
+                rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        */
+
+        /* 
+        * Option 3: Inline with Content (Uncomment to use)
+        * - Places badge below name instead of floating
+        */
+        /*
+        .linkedin-badge-container {
+            position: static;
+            display: inline-block;
+            margin: 20px auto;
+            opacity: 0.95;
+        }
+        
+        .header-content {
+            flex-direction: column;
+        }
+        */
+
+        /* 
+        * Option 4: Sidebar Style (Uncomment to use)
+        * - Creates a vertical accent stripe on the left
+        */
+        /*
         .linkedin-badge-container {
             position: absolute;
             left: 0;
             top: 50%;
             transform: translateY(-50%);
             z-index: 10;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background: linear-gradient(180deg, 
+                rgba(255,255,255,0.08) 0%, 
+                rgba(255,255,255,0.02) 100%);
+            border-right: 1px solid rgba(255,255,255,0.2);
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        */
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translate(-30px, -50%);
+            }
+            to {
+                opacity: 0.95;
+                transform: translate(0, -50%);
+            }
         }
 
-        /* Optional: Add hover effect to badge */
-        .linkedin-badge-container:hover {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        /* Style the LinkedIn badge iframe when it loads */
+        .LI-profile-badge {
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .LI-profile-badge:hover {
+            filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.3));
+            transform: scale(1.02);
         }
 
         .header-text {
@@ -348,24 +431,36 @@
             }
 
             .linkedin-badge-container {
-                position: static;
+                position: relative;
+                left: auto;
+                top: auto;
                 transform: none;
                 margin-bottom: 20px;
+                display: flex;
+                justify-content: center;
+                opacity: 1;
             }
 
             .header-content {
                 flex-direction: column;
+                min-height: auto;
             }
 
             .header-text {
-                margin-top: 20px;
+                margin-top: 0;
             }
         }
 
         @media (max-width: 1024px) {
             .linkedin-badge-container {
-                left: -20px;
-                transform: translateY(-50%) scale(0.9);
+                left: 10px;
+                transform: translateY(-50%) scale(0.85);
+            }
+        }
+
+        @media (min-width: 1400px) {
+            .linkedin-badge-container {
+                left: 60px;
             }
         }
     </style>
