@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>Data Science Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
@@ -42,15 +42,47 @@
             padding: 60px 0;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
         }
 
-        .header-content h1 {
+        .header-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .linkedin-badge-container {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Optional: Add hover effect to badge */
+        .linkedin-badge-container:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-text {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header-text h1 {
             font-size: 3rem;
             margin-bottom: 10px;
             animation: fadeInDown 1s ease;
         }
 
-        .header-content p {
+        .header-text p {
             font-size: 1.2rem;
             margin-bottom: 30px;
             opacity: 0.95;
@@ -119,7 +151,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .info-box {
@@ -193,6 +225,37 @@
         .chart-wrapper {
             position: relative;
             height: 300px;
+            padding: 10px;
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .chart-wrapper:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        /* Loading animation for charts */
+        @keyframes pulse {
+            0% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        .chart-wrapper canvas {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .chart-wrapper canvas.loaded {
+            animation: none;
         }
 
         /* Adaptability Section */
@@ -268,7 +331,7 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header-content h1 {
+            .header-text h1 {
                 font-size: 2rem;
             }
 
@@ -283,40 +346,79 @@
             .info-section {
                 grid-template-columns: 1fr;
             }
+
+            .linkedin-badge-container {
+                position: static;
+                transform: none;
+                margin-bottom: 20px;
+            }
+
+            .header-content {
+                flex-direction: column;
+            }
+
+            .header-text {
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .linkedin-badge-container {
+                left: -20px;
+                transform: translateY(-50%) scale(0.9);
+            }
         }
     </style>
 </head>
 <body>
     <header>
+        <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
         <div class="container">
             <div class="header-content">
-                <h1>Harshvardan S M</h1>
-                <p>Data Science Enthusiast | Fresher | Ready to Learn & Adapt</p>
-                
-                <div class="social-links">
-                    <a href="https://linkedin.com/in/harshvardan" target="_blank" class="social-btn">
-                        <i class="fab fa-linkedin"></i>
-                        LinkedIn
-                    </a>
-                    <a href="https://leetcode.com/u/Harsh-D14" target="_blank" class="social-btn">
-                        <i class="fas fa-code"></i>
-                        LeetCode
-                    </a>
-                    <a href="https://github.com/Harsh-D14" target="_blank" class="social-btn">
-                        <i class="fab fa-github"></i>
-                        GitHub
-                    </a>
+                <div class="linkedin-badge-container">
+                    <div class="badge-base LI-profile-badge" 
+                         data-locale="en_US" 
+                         data-size="medium" 
+                         data-theme="light" 
+                         data-type="VERTICAL" 
+                         data-vanity="harshvardan" 
+                         data-version="v1">
+                        <a class="badge-base__link LI-simple-link" 
+                           href="https://in.linkedin.com/in/harshvardan?trk=profile-badge">
+                        </a>
+                    </div>
                 </div>
-                
-                <a href="projects.html" class="projects-btn">
-                    <i class="fas fa-folder-open"></i>
-                    View Projects
+                <div class="header-text">
+                    <h1>Harshvardan S M</h1>
+                    <p>Data Science Enthusiast | Fresher | Ready to Learn & Adapt</p>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://linkedin.com/in/harshvardan" target="_blank" class="social-btn">
+                    <i class="fab fa-linkedin"></i>
+                    LinkedIn
+                </a>
+                <a href="https://leetcode.com/u/Harsh-D14" target="_blank" class="social-btn">
+                    <i class="fas fa-code"></i>
+                    LeetCode
+                </a>
+                <a href="https://github.com/Harsh-D14" target="_blank" class="social-btn">
+                    <i class="fab fa-github"></i>
+                    GitHub
                 </a>
             </div>
+            
+            <a href="projects.html" class="projects-btn">
+                <i class="fas fa-folder-open"></i>
+                View Projects
+            </a>
         </div>
     </header>
+
     <main>
-        <div class="skills-section">
+        <div class="container">
+            <div class="skills-section">
                 <h2>Technical Proficiency</h2>
                 <div class="charts-container">
                     <div class="chart-wrapper">
@@ -324,6 +426,41 @@
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="skillChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-wrapper" style="margin-top: 40px; height: 250px;">
+                    <canvas id="experienceChart"></canvas>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-box">
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    <div class="info-item">
+                        <h3>M.Tech in Data Science</h3>
+                        <p>Jain University | 2022-2024</p>
+                        <p>CGPA: 9.3/10</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>B.E in Computer Science and Engineering</h3>
+                        <p>Sona College of Technology | 2018-2022</p>
+                        <p>CGPA: 8.82/10</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h2><i class="fas fa-trophy"></i> Achievements</h2>
+                    <div class="info-item">
+                        <h3>Toycathon 2021-22 Winner</h3>
+                        <p>All India Contest | Developed an IoT-based smart toy for specially abled individuals</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Covid-19 Assistance App Winner</h3>
+                        <p>Intra-College Contest | Developed Vee+Svasa app with team</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>Academic Excellence</h3>
+                        <p>Consistent high CGPA in both B.E and M.Tech programs</p>
                     </div>
                 </div>
             </div>
@@ -336,7 +473,7 @@
                     <span class="tech-badge">Machine Learning</span>
                     <span class="tech-badge">Deep Learning</span>
                     <span class="tech-badge">Data Analysis</span>
-                    <span class="tech-badge">Internet of Things(IoT)</span>
+                    <span class="tech-badge">Internet of Things (IoT)</span>
                     <span class="tech-badge">Artificial Intelligence</span>
                     <span class="tech-badge">Statistical Analysis</span>
                     <span class="tech-badge">Data Visualization</span>
@@ -344,130 +481,394 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="info-section">
-                <div class="info-box">
-                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-                    <div class="info-item">
-                        <h3>M.Tech in Data Science</h3>
-                        <p>Jain University | 2022-2024</p>
-                        <p>CGPA: 9.3/10 </p>
-                    </div>
-                    <div class="info-item">
-                        <h3>B.E in Computer Science and Engineering</h3>
-                        <p>Sona College of Technology | 2018-2022</p>
-                        <p>CGPA: 8.82/10 </p>
-                    </div>
-                </div>
-
-                <div class="info-box">
-                    <h2><i class="fas fa-trophy"></i> Achievements</h2>
-                    <div class="info-item">
-                        <h3>Toycathon 2021-22 Winner</h3>
-                        <p>All India Contest: Developed an IoT-based smart toy for the specially abled individuals exercise hand rotary movements through an interactive digital experience.</p>
-                    </div>
-                    <div class="info-item">
-                        <h3>Covid-19 Assisstance Mobile Application - Intra-College App Development Contest Winner</h3>
-                        <p>Developed Vee+Svasa app with a team of colleagues to assist real-world Covid-19 patient issues, gaining support from Vee Technologies and Johns Hopkins University.</p>
-                    </div>
-                </div>
-            </div>
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Harshvardan</p>
+            <p>&copy; 2024 Harshvardan S M. Built with passion for Data Science.</p>
         </div>
     </footer>
 
     <script>
-        // Programming Languages Pie Chart
-        const ctx1 = document.getElementById('languageChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'pie',
-            data: {
-                labels: ['C++', 'Python', 'JavaScript', 'SQL', 'R', 'Java'],
-                datasets: [{
-                    data: [30, 40, 5, 10, 5, 10],
-                    backgroundColor: [
-                        '#3498db',
-                        '#2ecc71',
-                        '#f39c12',
-                        '#e74c3c',
-                        '#9b59b6',
-                        '#1abc9c'
-                    ],
-                    borderWidth: 2,
-                    borderColor: '#fff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 15,
+        // Wait for page load to trigger animations
+        window.addEventListener('load', () => {
+            // Check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+
+            let chartsAnimated = false;
+
+            // Programming Languages Pie Chart with animations
+            const ctx1 = document.getElementById('languageChart').getContext('2d');
+            const languageChart = new Chart(ctx1, {
+                type: 'pie',
+                data: {
+                    labels: ['C++', 'Python', 'JavaScript', 'SQL', 'R', 'Java'],
+                    datasets: [{
+                        data: [30, 40, 5, 10, 5, 10],
+                        backgroundColor: [
+                            '#3498db',
+                            '#2ecc71',
+                            '#f39c12',
+                            '#e74c3c',
+                            '#9b59b6',
+                            '#1abc9c'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#fff',
+                        hoverOffset: 20,  // Zoom effect on hover
+                        hoverBorderWidth: 3,
+                        hoverBorderColor: '#2c3e50'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true,
+                        duration: 2000,
+                        easing: 'easeOutQuart',
+                        delay: (context) => {
+                            // Stagger animation for each slice
+                            let delay = 0;
+                            if (context.type === 'data' && context.mode === 'default') {
+                                delay = context.dataIndex * 100;
+                            }
+                            return delay;
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 12
+                                },
+                                generateLabels: (chart) => {
+                                    const data = chart.data;
+                                    return data.labels.map((label, i) => ({
+                                        text: `${label} (${data.datasets[0].data[i]}%)`,
+                                        fillStyle: data.datasets[0].backgroundColor[i],
+                                        hidden: false,
+                                        index: i
+                                    }));
+                                }
+                            },
+                            onHover: (event, legendItem, legend) => {
+                                document.body.style.cursor = 'pointer';
+                            },
+                            onLeave: (event, legendItem, legend) => {
+                                document.body.style.cursor = 'default';
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Programming Languages',
                             font: {
-                                size: 12
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            padding: 20
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            padding: 12,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    return `${label}: ${value}%`;
+                                }
                             }
                         }
                     },
-                    title: {
-                        display: true,
-                        text: 'Programming Languages',
-                        font: {
-                            size: 16
-                        }
-                    }
-                }
-            }
-        });
-
-        // Skills Radar Chart
-        const ctx2 = document.getElementById('skillChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'radar',
-            data: {
-                labels: ['Problem Solving', 'Data Analysis', 'Machine Learning', 'Communication', 'Team Work', 'Adaptability'],
-                datasets: [{
-                    label: 'Skill Level',
-                    data: [85, 80, 75, 90, 88, 95],
-                    backgroundColor: 'rgba(103, 126, 234, 0.2)',
-                    borderColor: 'rgba(103, 126, 234, 1)',
-                    borderWidth: 2,
-                    pointBackgroundColor: 'rgba(103, 126, 234, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(103, 126, 234, 1)'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        max: 100,
-                        ticks: {
-                            stepSize: 20
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
+                    interaction: {
+                        mode: 'nearest',
+                        intersect: true
                     },
-                    title: {
-                        display: true,
-                        text: 'Core Competencies',
-                        font: {
-                            size: 16
+                    onHover: (event, activeElements) => {
+                        ctx1.canvas.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+                    }
+                }
+            });
+
+            // Skills Radar Chart with animations
+            const ctx2 = document.getElementById('skillChart').getContext('2d');
+            const skillChart = new Chart(ctx2, {
+                type: 'radar',
+                data: {
+                    labels: ['Problem Solving', 'Data Analysis', 'Machine Learning', 'Communication', 'Team Work', 'Adaptability'],
+                    datasets: [{
+                        label: 'Skill Level',
+                        data: [85, 80, 75, 90, 88, 95],
+                        backgroundColor: 'rgba(103, 126, 234, 0.2)',
+                        borderColor: 'rgba(103, 126, 234, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(103, 126, 234, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(103, 126, 234, 1)',
+                        pointRadius: 5,
+                        pointHoverRadius: 8,
+                        pointBorderWidth: 2,
+                        pointHoverBorderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart',
+                        delay: (context) => {
+                            // Animate points one by one
+                            if (context.type === 'point') {
+                                return context.dataIndex * 150;
+                            }
+                            return 0;
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20,
+                                font: {
+                                    size: 10
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            angleLines: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 11,
+                                    weight: '500'
+                                },
+                                color: '#666'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Core Competencies',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            padding: 20
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.parsed.r}%`;
+                                }
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'point',
+                        intersect: true
+                    },
+                    onHover: (event, activeElements) => {
+                        ctx2.canvas.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+                    },
+                    elements: {
+                        line: {
+                            borderWidth: 2,
+                            borderColor: 'rgba(103, 126, 234, 1)',
+                            tension: 0.4  // Smooth curves
                         }
                     }
                 }
+            });
+
+            // Experience/Tools Bar Chart with animations
+            const ctx3 = document.getElementById('experienceChart').getContext('2d');
+            const experienceChart = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['Data Analysis', 'Machine Learning', 'Deep Learning', 'Data Visualization', 'Cloud Platforms', 'Version Control'],
+                    datasets: [{
+                        label: 'Experience Level',
+                        data: [90, 85, 70, 88, 65, 92],
+                        backgroundColor: [
+                            'rgba(52, 152, 219, 0.8)',
+                            'rgba(46, 204, 113, 0.8)',
+                            'rgba(243, 156, 18, 0.8)',
+                            'rgba(231, 76, 60, 0.8)',
+                            'rgba(155, 89, 182, 0.8)',
+                            'rgba(26, 188, 156, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(52, 152, 219, 1)',
+                            'rgba(46, 204, 113, 1)',
+                            'rgba(243, 156, 18, 1)',
+                            'rgba(231, 76, 60, 1)',
+                            'rgba(155, 89, 182, 1)',
+                            'rgba(26, 188, 156, 1)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        hoverBackgroundColor: [
+                            'rgba(52, 152, 219, 1)',
+                            'rgba(46, 204, 113, 1)',
+                            'rgba(243, 156, 18, 1)',
+                            'rgba(231, 76, 60, 1)',
+                            'rgba(155, 89, 182, 1)',
+                            'rgba(26, 188, 156, 1)'
+                        ],
+                        barThickness: 40,
+                        maxBarThickness: 50
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutBounce',
+                        delay: (context) => {
+                            let delay = 0;
+                            if (context.type === 'data' && context.mode === 'default') {
+                                delay = context.dataIndex * 200 + 500;
+                            }
+                            return delay;
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20,
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Domain Expertise',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            padding: 20
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            callbacks: {
+                                label: function(context) {
+                                    return `Proficiency: ${context.parsed.y}%`;
+                                }
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    onHover: (event, activeElements) => {
+                        ctx3.canvas.style.cursor = activeElements.length > 0 ? 'pointer' : 'default';
+                    }
+                }
+            });
+
+            // Initially set animations to paused
+            languageChart.options.animation.duration = 0;
+            skillChart.options.animation.duration = 0;
+            experienceChart.options.animation.duration = 0;
+            languageChart.update();
+            skillChart.update();
+            experienceChart.update();
+
+            // Function to trigger animations when scrolled into view
+            function animateChartsOnScroll() {
+                const skillsSection = document.querySelector('.skills-section');
+                
+                if (!chartsAnimated && isInViewport(skillsSection)) {
+                    chartsAnimated = true;
+                    
+                    // Mark canvases as loaded
+                    document.getElementById('languageChart').classList.add('loaded');
+                    document.getElementById('skillChart').classList.add('loaded');
+                    document.getElementById('experienceChart').classList.add('loaded');
+                    
+                    // Reset and trigger animations
+                    languageChart.options.animation.duration = 2000;
+                    skillChart.options.animation.duration = 2000;
+                    experienceChart.options.animation.duration = 2000;
+                    
+                    // Restart animations
+                    languageChart.reset();
+                    skillChart.reset();
+                    experienceChart.reset();
+                    languageChart.update('active');
+                    skillChart.update('active');
+                    experienceChart.update('active');
+                }
             }
+
+            // Check on scroll
+            window.addEventListener('scroll', animateChartsOnScroll);
+            
+            // Check immediately in case already in view
+            animateChartsOnScroll();
+
+            // Add custom CSS for smooth transitions
+            const style = document.createElement('style');
+            style.textContent = `
+                canvas {
+                    transition: transform 0.2s ease;
+                }
+                canvas:hover {
+                    transform: scale(1.02);
+                }
+            `;
+            document.head.appendChild(style);
         });
     </script>
 </body>
