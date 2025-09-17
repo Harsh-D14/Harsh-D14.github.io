@@ -1,10 +1,18 @@
-<!DOCTYPE html>
+@keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harshvardan's Portfolio</title>
-    <link rel="icon" type="image/png" href="image1.png">
+    <title>Data Science Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
@@ -332,32 +340,6 @@
             font-size: 0.95rem;
         }
 
-        /* 
-         * LinkedIn Badge Positioning Options
-         * Option 1: Right side (current)
-         * Option 2: Left side - Uncomment below
-         */
-        /*
-        .skills-wrapper {
-            flex-direction: row-reverse;
-        }
-        
-        .linkedin-badge-container {
-            animation: slideInLeft 1s ease;
-        }
-        
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        */
-
         /* Skills Wrapper and Layout */
         .skills-wrapper {
             display: flex;
@@ -365,6 +347,17 @@
             align-items: flex-start;
             margin-bottom: 40px;
         }
+
+        /* 
+         * LinkedIn Badge Positioning Options
+         * Option 1: Right side (current)
+         * Option 2: Left side - Uncomment below to switch
+         */
+        /*
+        .skills-wrapper {
+            flex-direction: row-reverse;
+        }
+        */
 
         /* Skills Section */
         .skills-section {
@@ -453,6 +446,24 @@
         .chart-wrapper {
             position: relative;
             height: 300px;
+            padding: 10px;
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .chart-wrapper:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .chart-wrapper canvas {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .chart-wrapper canvas.loaded {
+            animation: none;
         }
 
         /* Adaptability Section */
@@ -494,13 +505,7 @@
             background: var(--dark);
             color: white;
         }
-        .chart-wrapper canvas {
-            animation: pulse 1.5s ease-in-out infinite;
-        }
 
-        .chart-wrapper canvas.loaded {
-            animation: none;
-        }
         /* Animations */
         @keyframes fadeInDown {
             from {
@@ -532,16 +537,7 @@
                 opacity: 1;
             }
         }
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+
         /* Responsive */
         @media (max-width: 1200px) {
             .skills-wrapper {
@@ -567,7 +563,7 @@
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                gap: 0px;
+                gap: 20px;
             }
 
             .profile-circle,
@@ -637,18 +633,18 @@
         <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="profile-square" title="View Profile">
-                    <img src="image1.png" alt="Harshvardan S M" 
+                <a href="#" class="profile-circle" title="View Profile">
+                    <img src="image1.jpg" alt="Harshvardan S M" 
                          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23667eea%22/%3E%3Ctext x=%2250%22 y=%2255%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22white%22%3EH%3C/text%3E%3C/svg%3E'">
                 </a>
                 <div class="header-text">
                     <h1>Harshvardan S M</h1>
                     <p>Data Science Enthusiast | Fresher | Ready to Learn & Adapt</p>
                 </div>
-                <!-- <a href="#" class="profile-square" title="Professional Profile">
-                    <img src="image1.png" alt="Harshvardan S M Professional" 
+                <a href="#" class="profile-square" title="Professional Profile">
+                    <img src="image2.jpg" alt="Harshvardan S M Professional" 
                          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23764ba2%22/%3E%3Ctext x=%2250%22 y=%2255%22 text-anchor=%22middle%22 font-size=%2240%22 fill=%22white%22%3EHS%3C/text%3E%3C/svg%3E'">
-                </a> -->
+                </a>
             </div>
             
             <div class="social-links">
