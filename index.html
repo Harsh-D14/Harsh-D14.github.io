@@ -155,16 +155,6 @@
             }
         }
 
-        /* Style the LinkedIn badge iframe when it loads */
-        .LI-profile-badge {
-            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
-            transition: all 0.3s ease;
-        }
-
-        .linkedin-badge-container:hover .LI-profile-badge {
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
-        }
-
         .header-text {
             flex: 1;
             display: flex;
@@ -353,57 +343,6 @@
             text-align: center;
             font-size: 2rem;
         }
-
-        /* LinkedIn Badge Container - Outside the box */
-        .linkedin-badge-container {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 20px;
-            animation: slideInRight 1s ease;
-            transition: all 0.3s ease;
-            border: 1px solid #f0f0f0;
-            min-width: 280px;
-            align-self: flex-start;
-        }
-
-        .linkedin-badge-container:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-            transform: translateY(-5px);
-            border-color: #e0e0e0;
-        }
-
-        .linkedin-badge-container::before {
-            content: 'Professional Network';
-            display: block;
-            text-align: center;
-            background: var(--gradient);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 700;
-            font-size: 1rem;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .linkedin-badge-container::after {
-            content: '✓ Verified Profile';
-            display: block;
-            text-align: center;
-            color: var(--secondary);
-            font-size: 0.85rem;
-            margin-top: 15px;
-            padding-top: 10px;
-            border-top: 1px solid #f0f0f0;
-            font-weight: 500;
-        }
-
         @keyframes slideInRight {
             from {
                 opacity: 0;
@@ -546,21 +485,6 @@
             .skills-wrapper {
                 flex-direction: column;
             }
-
-            .linkedin-badge-container {
-                position: static;
-                width: 100%;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-
-            .linkedin-badge-container::before {
-                content: 'Professional Network';
-            }
-
-            .linkedin-badge-container::after {
-                content: '✓ Verified LinkedIn Profile';
-            }
         }
 
         @media (max-width: 768px) {
@@ -602,11 +526,6 @@
                 flex-direction: column;
                 gap: 20px;
             }
-
-            .linkedin-badge-container {
-                width: 100%;
-                max-width: 300px;
-            }
         }
 
         @media (max-width: 1024px) {
@@ -639,7 +558,6 @@
 </head>
 <body>
     <header>
-        <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
         <div class="container">
             <div class="header-content">
                 <a href="#" class="profile-square" title="Professional Profile">
@@ -689,19 +607,6 @@
                     </div>
                     <div class="chart-wrapper" style="margin-top: 40px; height: 250px;">
                         <canvas id="experienceChart"></canvas>
-                    </div>
-                </div>
-                <div class="linkedin-badge-container">
-                    <div class="badge-base LI-profile-badge" 
-                         data-locale="en_US" 
-                         data-size="medium" 
-                         data-theme="light" 
-                         data-type="VERTICAL" 
-                         data-vanity="harshvardan" 
-                         data-version="v1">
-                        <a class="badge-base__link LI-simple-link" 
-                           href="https://linkedin.com/in/harshvardan?trk=profile-badge">
-                        </a>
                     </div>
                 </div>
             </div>
