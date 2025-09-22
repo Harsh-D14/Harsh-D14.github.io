@@ -89,12 +89,24 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
+        }
+
+        .project-card[style*="cursor: pointer"] {
             cursor: pointer;
         }
 
-        .project-card:hover {
+        .project-card[style*="cursor: pointer"]:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .project-card[style*="cursor: default"] {
+            cursor: default;
+        }
+
+        .project-card[style*="cursor: default"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .project-image {
@@ -115,7 +127,7 @@
             transition: transform 0.3s ease;
         }
 
-        .project-card:hover .project-image img {
+        .project-card[style*="cursor: pointer"]:hover .project-image img {
             transform: scale(1.1);
         }
 
@@ -194,9 +206,27 @@
             font-weight: 600;
         }
 
-        .view-gallery-btn:hover {
+        .view-gallery-btn:hover:not(.disabled) {
             background: var(--secondary);
             color: white;
+        }
+
+        .view-gallery-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            color: #999;
+            border-color: #999;
+        }
+
+        .view-gallery-btn.disabled:hover {
+            background: transparent;
+            color: #999;
+        }
+
+        .no-links-message {
+            color: #999;
+            font-style: italic;
+            font-size: 0.9rem;
         }
 
         /* Modal Gallery */
@@ -317,6 +347,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.98);
+            overflow: auto;
         }
 
         .lightbox.active {
@@ -326,14 +357,29 @@
         }
 
         .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .lightbox-content img {
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
             object-fit: contain;
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-content img.zoomed {
+            cursor: zoom-out;
+            transform: scale(1.5);
+            max-width: none;
+            max-height: none;
         }
 
         .lightbox-close {
@@ -343,30 +389,47 @@
             color: white;
             font-size: 40px;
             cursor: pointer;
+            z-index: 2001;
+            background: rgba(0,0,0,0.5);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(0,0,0,0.8);
         }
 
         .nav-arrow {
-            position: absolute;
+            position: fixed;
             top: 50%;
             transform: translateY(-50%);
             color: white;
             font-size: 3rem;
             cursor: pointer;
             padding: 20px;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, background 0.3s ease;
             user-select: none;
+            background: rgba(0,0,0,0.3);
+            z-index: 2001;
         }
 
         .nav-arrow:hover {
             color: var(--secondary);
+            background: rgba(0,0,0,0.5);
         }
 
         .nav-arrow.prev {
             left: 20px;
+            border-radius: 0 10px 10px 0;
         }
 
         .nav-arrow.next {
             right: 20px;
+            border-radius: 10px 0 0 10px;
         }
 
         /* Loading Animation */
@@ -460,17 +523,19 @@
         <div class="lightbox-content">
             <img id="lightboxImage" src="" alt="">
         </div>
+        <div class="zoom-hint">Click image to zoom</div>
     </div>
 
     <footer>
         <div class="container">
-            <p>&copy;2025 Harshvardan. Last Updated: 22<sup>nd</sup> September 2025</p>
+            <p>&copy;2025 Harshvardan. Last Updated: 23<sup>rd</sup> September 2025</p>
         </div>
     </footer>
 
     <script>
         // Project Data Configuration
         // Update this array with your actual projects
+        // Set to null or empty array when you don't have content
         const projects = [
             {
                 id: 'project1',
@@ -478,8 +543,8 @@
                 folder: 'RPi_server',
                 technologies: ['Linux', 'Shell Scripting', 'Network Hosting','Databases', 'SSH', 'Server Hosting'],
                 description: 'Built a self hosted network storage server using Raspberry Pi (Linux).',
-                githubLink:'https://www.linkedin.com/pulse/my-journey-building-diy-nas-server-raspberry-pi-4-privacy-s-m-rqlnf/?trackingId=26QhC%2F%2FSTYSo52r7CvmS0Q%3D%3D',
-                liveLink: '#',
+                githubLink: null,
+                articleLink:'https://www.linkedin.com/pulse/my-journey-building-diy-nas-server-raspberry-pi-4-privacy-s-m-rqlnf/?trackingId=26QhC%2F%2FSTYSo52r7CvmS0Q%3D%3D',
                 images: [
                     'image1.jpg',
                     'image2.jpg',
@@ -493,10 +558,8 @@
                 technologies: ['Python', 'Jupyter (EDA)', 'Data Engineering','Data Analysis', 'Machine Learning', 'Data Science', 'Stream-lit Web Dashboard','NLP'],
                 description: 'Developed an AI-powered Task Management System that predicts task priority and category from simple, natural-language descriptions.',
                 githubLink: 'https://github.com/Harsh-D14/AI-Powered-Task-Management-System',
-                liveLink: '#',
-                images: [
-                    'thumbnail.jpg',
-                ]
+                articleLink:null,
+                images: []
             },
             {
                 id: 'project3',
@@ -505,10 +568,8 @@
                 technologies: ['Python', 'NLTK', 'Machine Learning', 'Data Analysis', 'Data Visualization', 'Recommendation Engine and Systems'],
                 description: 'Developed a machine learning-based recommendation engine that provides product suggestions to users based on historical interactions, behavior, and user-item metadata.',
                 githubLink: 'https://github.com/Harsh-D14/Personalized-Recommendation-System',
-                liveLink: '#',
-                images: [
-                    'thumbnail.jpg',
-                ]
+                articleLink: null,
+                images: []
             },
             {
                 id: 'project4',
@@ -517,7 +578,7 @@
                 technologies: ['NodeJS', 'JavaScript', 'NodeMCU', 'Web UI/UX Development', 'Front-End Development', 'IoT and sensors'],
                 description: 'Built an IoT-powered interactive toy from the ground up, blending empathy with engineering to support playful learning for people with special needs.',
                 githubLink: 'https://github.com/Harsh-D14/Toycathon',
-                liveLink: '#',
+                articleLink: null,
                 images: [ 'image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg'
                 ]
             },
@@ -528,10 +589,12 @@
                 technologies: ['Python', 'Raspberry Pi', 'IoT', 'C++', 'Arduino', 'ADC'],
                 description: 'Engineered a low-cost, touch-free elevator interface using ultrasonic sensing—an innovative response to public safety challenges posed by COVID-19.',
                 githubLink: 'https://github.com/Harsh-D14/Contactless_Elevator',
-                liveLink: '#',
+                articleLink: 'https://srinivasuniverstrg.blob.core.windows.net/srinivas-university/3.4.5%20List%20of%20Conference%20Book_Chapters%202021-22.pdf',
                 images: [
                     'image1.jpg',
                     'image2.jpg',
+                    'image3.jpg',
+                    'image4.jpg',
                 ]
             },
             {
@@ -541,7 +604,7 @@
                 technologies: ['Mobile App Development', 'Android Studio', 'Figma', 'UI/UX'],
                 description: 'Built a user-friendly interface for a mobile app that streamlined access to COVID-19 support—connecting people to medical and essential services when it mattered most.',
                 githubLink: 'https://github.com/Harsh-D14/Vee-CoviCare-App',
-                liveLink: '#',
+                articleLink: 'https://health.economictimes.indiatimes.com/news/health-it/johns-hopkins-supported-app-to-guide-covid-patients-at-home-in-india/83800664',
                 images: [
                     'image1.jpg',
                     'image2.jpg',
@@ -557,8 +620,8 @@
                 folder: 'Sidewalk Delivery Drone',
                 technologies: ['C++', 'Python', 'NAViC Navigation', 'IoT', 'Arduino', 'Raspberry Pi', 'OpenCV', 'UltraSonic Sensors', 'Web Application', 'Firebase DB'],
                 description: 'Developed an Unmanned Ground Vehicle for campus cargo transport providing the ability to switch from conventional ICE vehicles to smaller electric delivery drones/vehicles',
-                githubLink: 'https://github.com/Harsh-D14/SDD_Project',
-                liveLink: '#',
+                githubLink:null,
+                articleLink:null,
                 images: [
                     'image1.jpeg',
                     'image2.jpeg',
@@ -586,8 +649,55 @@
             const card = document.createElement('div');
             card.className = 'project-card';
             
+            // Check if project has images for gallery
+            const hasImages = project.images && project.images.length > 0;
+            const hasGithub = project.githubLink && project.githubLink !== null;
+            const hasArticle = project.articleLink !== null;
+            
             // Create thumbnail path
             const thumbnailPath = `${project.folder}/thumbnail.jpg`;
+            
+            // Build the buttons HTML conditionally
+            let buttonsHTML = '<div class="project-links">';
+            
+            // GitHub button - only show if link exists
+            if (hasGithub) {
+                buttonsHTML += `
+                    <a href="${project.githubLink}" target="_blank" class="project-link" onclick="event.stopPropagation()">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>`;
+            }
+            
+            // Live Demo button - only show if link exists
+            if (hasArticle) {
+                buttonsHTML += `
+                    <a href="${project.articleLink}" target="_blank" class="project-link" onclick="event.stopPropagation()">
+                        <i class="fas fa-external-link-alt"></i>
+                        Article
+                    </a>`;
+            }
+            // Gallery button - show disabled state if no images
+            if (hasImages) {
+                buttonsHTML += `
+                    <button class="view-gallery-btn" onclick="event.stopPropagation(); openGallery('${project.id}')">
+                        <i class="fas fa-images"></i>
+                        View Gallery (${project.images.length})
+                    </button>`;
+            } else {
+                buttonsHTML += `
+                    <button class="view-gallery-btn disabled" disabled onclick="event.stopPropagation()">
+                        <i class="fas fa-images"></i>
+                        No Images
+                    </button>`;
+            }
+            
+            // Show a message if no buttons at all
+            if (!hasGithub && !hasArticle) {
+                buttonsHTML += `<span class="no-links-message">Resources coming soon...</span>`;
+            }
+            
+            buttonsHTML += '</div>';
             
             card.innerHTML = `
                 <div class="project-image">
@@ -603,26 +713,17 @@
                         ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
                     </div>
                     <p class="project-description">${project.description}</p>
-                    <div class="project-links">
-                        <a href="${project.githubLink}" target="_blank" class="project-link" onclick="event.stopPropagation()">
-                            <i class="fab fa-github"></i>
-                            GitHub
-                        </a>
-                        ${project.liveLink !== '#' ? `
-                        <a href="${project.liveLink}" target="_blank" class="project-link" onclick="event.stopPropagation()">
-                            <i class="fas fa-external-link-alt"></i>
-                            Live Demo
-                        </a>` : ''}
-                        <button class="view-gallery-btn" onclick="event.stopPropagation(); openGallery('${project.id}')">
-                            <i class="fas fa-images"></i>
-                            View Gallery
-                        </button>
-                    </div>
+                    ${buttonsHTML}
                 </div>
             `;
             
-            // Add click event to open gallery
-            card.addEventListener('click', () => openGallery(project.id));
+            // Only add click event for gallery if there are images
+            if (hasImages) {
+                card.addEventListener('click', () => openGallery(project.id));
+                card.style.cursor = 'pointer';
+            } else {
+                card.style.cursor = 'default';
+            }
             
             return card;
         }
@@ -630,6 +731,12 @@
         function openGallery(projectId) {
             const project = projects.find(p => p.id === projectId);
             if (!project) return;
+            
+            // Check if project has images
+            if (!project.images || project.images.length === 0) {
+                console.log('No images available for this project');
+                return;
+            }
             
             currentProject = project;
             currentImages = project.images;
@@ -674,13 +781,27 @@
             const imagePath = `${currentProject.folder}/${currentImages[index]}`;
             lightboxImage.src = imagePath;
             lightboxImage.alt = `${currentProject.title} - Image ${index + 1}`;
+            lightboxImage.classList.remove('zoomed');
             
             lightbox.classList.add('active');
+            
+            // Add zoom functionality
+            lightboxImage.onclick = function() {
+                this.classList.toggle('zoomed');
+                if (this.classList.contains('zoomed')) {
+                    lightbox.style.overflow = 'auto';
+                } else {
+                    lightbox.style.overflow = 'hidden';
+                }
+            };
         }
 
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
             lightbox.classList.remove('active');
+            lightboxImage.classList.remove('zoomed');
+            lightbox.style.overflow = 'hidden';
         }
 
         function navigateImage(direction) {
