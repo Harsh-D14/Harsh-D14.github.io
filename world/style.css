@@ -1,0 +1,85 @@
+/* World view: a globe in empty space. Dark only, because it is space. */
+:root {
+  --bg: #04060B;
+  --text: #EEF1F5;
+  --muted: #A9B3C2;
+  --panel: rgba(12, 18, 30, 0.78);
+  --panel-line: rgba(255, 255, 255, 0.12);
+  --accent: #F2B84B;
+  --pin: #9CC4FF;
+  --focus: #F2B84B;
+  --font-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --font-meta: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  overflow: hidden;
+}
+
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.skip { position: absolute; left: 16px; top: -60px; background: var(--text); color: var(--bg); padding: 8px 12px; z-index: 50; }
+.skip:focus { top: 12px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.viewbar { position: fixed; top: 0; left: 0; right: 0; z-index: 20; background: rgba(4, 6, 11, 0.7); color: var(--text); font-size: 13px; border-bottom: 1px solid var(--panel-line); }
+.viewbar-inner { max-width: 1240px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 14px; min-height: 36px; }
+.viewbar-label { opacity: 0.75; }
+.viewbar-links { display: flex; gap: 4px; flex-wrap: wrap; }
+.viewbar-links a { text-decoration: none; padding: 4px 10px; color: inherit; }
+.viewbar-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.viewbar-links a[aria-current] { background: var(--text); color: var(--bg); font-weight: 600; }
+
+#space, #globe { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+#globe { z-index: 1; }
+#globe:focus-visible { outline-offset: -6px; }
+#pins { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+
+.loading { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 3; margin: 0; font-family: var(--font-meta); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-align: center; max-width: 80vw; }
+
+/* Pins */
+.pin { position: absolute; left: 0; top: 0; will-change: transform, opacity; }
+.pin .dot { position: absolute; left: -4px; top: -4px; width: 8px; height: 8px; border-radius: 50%; background: var(--pin); box-shadow: 0 0 0 2px rgba(4, 6, 11, 0.8), 0 0 10px rgba(156, 196, 255, 0.8); }
+.pin.mine .dot { background: var(--accent); box-shadow: 0 0 0 2px rgba(4, 6, 11, 0.8), 0 0 10px rgba(242, 184, 75, 0.85); }
+.pin .lbl { position: absolute; left: 10px; top: -11px; white-space: nowrap; padding: 3px 7px; background: rgba(4, 6, 11, 0.72); border: 1px solid var(--panel-line); font-size: 13px; line-height: 1.2; }
+.pin.left .lbl { left: auto; right: 10px; }
+.pin .lbl b { font-weight: 600; margin-right: 6px; }
+.pin .lbl time { font-family: var(--font-meta); font-size: 12px; color: var(--muted); }
+.pin.mine .lbl time { color: var(--accent); }
+
+/* Controls */
+.controls {
+  position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 10;
+  display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+  background: var(--panel); border: 1px solid var(--panel-line);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  max-width: calc(100vw - 24px);
+}
+.controls button { font: 500 14px/1 var(--font-body); color: var(--text); background: transparent; border: 1px solid var(--panel-line); padding: 9px 12px; cursor: pointer; min-height: 38px; }
+.controls button:hover { border-color: var(--muted); }
+.toggle { display: inline-flex; align-items: center; gap: 9px; }
+.switch { position: relative; width: 30px; height: 16px; border-radius: 8px; background: #2A3547; transition: background 0.2s; }
+.switch::after { content: ""; position: absolute; left: 2px; top: 2px; width: 12px; height: 12px; border-radius: 50%; background: var(--muted); transition: transform 0.2s, background 0.2s; }
+.toggle[aria-pressed="true"] .switch { background: rgba(242, 184, 75, 0.35); }
+.toggle[aria-pressed="true"] .switch::after { transform: translateX(14px); background: var(--accent); }
+.clock { margin: 0 4px; font-family: var(--font-meta); font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+.credit { position: fixed; right: 12px; bottom: calc(8px + env(safe-area-inset-bottom, 0px)); z-index: 5; margin: 0; font-family: var(--font-meta); font-size: 10px; color: rgba(169, 179, 194, 0.6); }
+
+@media (max-width: 640px) {
+  .controls { flex-wrap: wrap; justify-content: center; width: calc(100vw - 24px); bottom: calc(26px + env(safe-area-inset-bottom, 0px)); }
+  .clock { order: 5; flex-basis: 100%; text-align: center; white-space: normal; }
+  .pin .lbl { font-size: 12px; padding: 2px 6px; }
+  .pin .lbl time { font-size: 11px; }
+  .credit { left: 0; right: 0; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch, .switch::after { transition: none; }
+}

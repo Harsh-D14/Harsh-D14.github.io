@@ -1222,6 +1222,43 @@
     </style>
 </head>
 <body>
+    <!-- View bar: switches between the Summary, Resume and Creative views -->
+    <style>
+        .hsm-viewbar { background: var(--bg-tertiary); color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle); font: 13px/1.4 var(--font-primary); position: relative; z-index: 1000; }
+        .hsm-viewbar-inner { max-width: 1240px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 14px; min-height: 36px; }
+        /* the live site styles every nav as a fixed header, undo that here */
+        .hsm-viewbar nav { position: static; padding: 0; background: none; border: 0; backdrop-filter: none; -webkit-backdrop-filter: none; transition: none; }
+        .hsm-viewbar a { color: var(--text-primary); text-decoration: none; padding: 4px 10px; border-radius: 4px; }
+        .hsm-viewbar a:hover { text-decoration: underline; text-underline-offset: 3px; }
+        .hsm-viewbar a:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 3px; }
+        .hsm-viewbar a[aria-current] { background: var(--accent-primary); color: #0a0a0b; font-weight: 600; }
+        /* the fixed header starts below the bar, then docks at the top once scrolled */
+        #navbar { top: 37px; }
+        #navbar.scrolled { top: 0; }
+        /* dark theme Earth background: fades in once running, sits under every section */
+        .bg-world { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
+        html.has-globe #bg-space { opacity: 1; }
+        html.has-globe #bg-globe { opacity: 0.6; }
+        html.has-globe #about, html.has-globe #projects, html.has-globe #education { background: rgba(17, 17, 19, 0.74); }
+        @media (prefers-reduced-motion: reduce) { .bg-world { transition: none; } }
+        /* small screens hide the nav links, keep the theme toggle reachable */
+        @media (max-width: 768px) { #navbar .nav-links { display: flex; } #navbar .nav-link { display: none; } }
+    </style>
+    <div class="hsm-viewbar">
+        <div class="hsm-viewbar-inner">
+            <span>View</span>
+            <nav aria-label="Portfolio view">
+                <a href="index.html" aria-current="page">Summary</a>
+                <a href="resume/index.html">Resume</a>
+                <a href="creative/index.html">Creative</a>
+                <a href="world/index.html">World</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Dark theme background: the sunlit Earth from the World view, drawn by shared/summary-globe.js -->
+    <canvas id="bg-space" class="bg-world" aria-hidden="true"></canvas>
+    <canvas id="bg-globe" class="bg-world" aria-hidden="true"></canvas>
     <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
@@ -1305,7 +1342,7 @@
                     deliver AI workshops, and build the internal systems the organisation runs on.
                 </p>
                 <p>
-                    Before moving to Australia I spent a year on the ADAS team at Continental AG in India,
+                    Before moving to Sydney in January 2026, I spent a year on the ADAS team at Continental AG in Bengaluru,
                     building automated pipelines for automotive sensor data from cameras, radar and lidar.
                 </p>
                 <p>
@@ -1335,10 +1372,13 @@
                             <span class="timeline-date">Apr 2026 to Present</span>
                         </div>
                         <ul class="timeline-achievements">
-                            <li>Design and deliver AI workshops and training for working professionals and community groups</li>
-                            <li>Work across the consultation, training and community programs</li>
+                            <li>Organised and ran the WSTI AI Hackathon for more than 70 participants, through to the grand finale</li>
+                            <li>Deliver AI training to students and small businesses through the Youth AI Engineers Club</li>
                             <li>Lead five club engineers on workshop and event delivery</li>
-                            <li>Built the Claude Code workspace the organisation runs on, including agent skills, a shared memory system and its first automated reporting routine</li>
+                            <li>Built the organisation's public website, wsti.org.au, with Astro and Sanity</li>
+                            <li>Built the Claude Code workspace the organisation runs on, including agent skills and a shared memory system</li>
+                            <li>Built a daily cloud routine that updates Notion with event registration counts from Eventbrite and Meetup</li>
+                            <li>Built a video content pipeline, and Python scripts for bulk participant email and certificate generation</li>
                         </ul>
                         <div class="timeline-tags">
                             <span class="skill-tag primary">Harness engineering</span>
@@ -1373,13 +1413,13 @@
                     <div class="timeline-card">
                         <div class="timeline-header">
                             <div>
-                                <h3 class="timeline-title">Volunteer</h3>
-                                <p class="timeline-company">Schnellstart, Switzerland</p>
+                                <h3 class="timeline-title">Intern</h3>
+                                <p class="timeline-company">Schnellstart, Switzerland (remote)</p>
                             </div>
                             <span class="timeline-date">Feb 2026 to Present</span>
                         </div>
                         <p class="timeline-description">
-                            Selected for a mentor-guided program in applied AI development and workflow automation.
+                            Mentor-guided internship in applied AI development and workflow automation.
                         </p>
                     </div>
                 </div>
@@ -1406,8 +1446,8 @@
                     <div class="timeline-card">
                         <div class="timeline-header">
                             <div>
-                                <h3 class="timeline-title">ADAS Engineer, Data Analysis and Automation</h3>
-                                <p class="timeline-company">Continental AG Technical Center India, now AUMOVIO</p>
+                                <h3 class="timeline-title">Automation Engineer Intern</h3>
+                                <p class="timeline-company">Continental AG Technical Center India, Bengaluru, now AUMOVIO</p>
                             </div>
                             <span class="timeline-date">Jul 2023 to Jul 2024</span>
                         </div>
@@ -1417,6 +1457,7 @@
                         </p>
                         <ul class="timeline-achievements">
                             <li>Built end to end automated ETL pipelines in Python and SQL that cut manual data processing by 95%</li>
+                            <li>Delivered a nine month automation project in two months, processing more than five million sensor records</li>
                             <li>Analysed camera, radar and lidar data to identify which sources were most useful for simulation</li>
                             <li>Designed job scheduling and orchestration with error handling, logging and monitoring dashboards</li>
                             <li>Worked with production databases of millions of records using optimised SQL</li>
@@ -1446,7 +1487,7 @@
                     <span class="project-stack">Claude Code, Eventbrite, Meetup, Notion</span>
                 </a>
                 <a href="projects.html" class="project-item">
-                    <h3>Healthcare mobile application</h3>
+                    <h3>Home quarantine assistance app</h3>
                     <p>Backend data architecture and analytics for a symptom tracking and telemedicine app, with Johns Hopkins University.</p>
                     <span class="project-stack">Python, Firebase, ETL</span>
                 </a>
@@ -1469,10 +1510,23 @@
                     <h3 class="skill-category-title">AI development</h3>
                     <div class="skill-tags">
                         <span class="skill-tag primary">Claude Code</span>
-                        <span class="skill-tag primary">Harness engineering</span>
+                        <span class="skill-tag primary">Claude API</span>
+                        <span class="skill-tag">Harness engineering</span>
                         <span class="skill-tag">Agent skills</span>
                         <span class="skill-tag">Prompt engineering</span>
                         <span class="skill-tag">Workflow automation</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-category-title">AI tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Codex</span>
+                        <span class="skill-tag">Antigravity</span>
+                        <span class="skill-tag">Cursor</span>
+                        <span class="skill-tag">GitHub Copilot</span>
+                        <span class="skill-tag">Hermes Agent</span>
+                        <span class="skill-tag">OpenClaw</span>
                         <span class="skill-tag">Ollama</span>
                     </div>
                 </div>
@@ -1528,6 +1582,7 @@
                         <span class="skill-tag">Docker</span>
                         <span class="skill-tag">Git</span>
                         <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Tailscale</span>
                     </div>
                 </div>
             </div>
@@ -1576,7 +1631,7 @@
             <div class="awards-grid reveal">
                 <div class="award-card">
                     <div class="award-content">
-                        <h3 class="award-title">National Winner, Toycathon 2021-22</h3>
+                        <h3 class="award-title">National Winner, Toycathon 2021/22</h3>
                         <p class="award-org">Government of India, more than 7,000 participants</p>
                         <p class="award-description">
                             Led a team of three in a 36 hour national competition. Built an IoT assistive toy
@@ -1587,8 +1642,8 @@
 
                 <div class="award-card">
                     <div class="award-content">
-                        <h3 class="award-title">Published paper</h3>
-                        <p class="award-org">IoT-Based Contactless Elevator Control System</p>
+                        <h3 class="award-title">Contactless elevator panel using IoT and deep learning</h3>
+                        <p class="award-org">Artificial Intelligence and Quantum Computing, December 2021</p>
                         <p class="award-description">
                             A contactless elevator control system using computer vision and gesture recognition,
                             with a working prototype.
@@ -1700,5 +1755,7 @@
         });
 
     </script>
+    <script src="shared/globe.js"></script>
+    <script src="shared/summary-globe.js"></script>
 </body>
 </html>

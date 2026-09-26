@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>World · Harshvardan S M</title>
+<meta name="description" content="A spinning globe with live local times pinned on cities, and a mode that shows the real sunlight for right now.">
+<meta name="theme-color" content="#04060B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#controls">Skip to globe controls</a>
+<div class="viewbar"><div class="viewbar-inner"><span class="viewbar-label">View</span><nav class="viewbar-links" aria-label="Portfolio view"><a href="../index.html">Summary</a><a href="../resume/index.html">Resume</a><a href="../creative/index.html">Creative</a><a href="index.html" aria-current="page">World</a></nav></div></div>
+
+<main id="main">
+  <h1 class="visually-hidden">World view, local times around the globe</h1>
+  <canvas id="space" aria-hidden="true"></canvas>
+  <canvas id="globe" tabindex="0" role="img" aria-label="A spinning globe of the Earth with local times pinned on cities. Drag it or use the arrow keys to turn it."></canvas>
+  <div id="pins" aria-hidden="true"></div>
+  <p id="loading" class="loading">Loading the globe</p>
+  <p id="fallback" class="loading" hidden>This browser cannot draw the globe. The local times are listed below.</p>
+
+  <div class="controls" id="controls" role="group" aria-label="Globe controls">
+    <button type="button" class="toggle" id="sun" aria-pressed="false"><span class="switch" aria-hidden="true"></span>Sunlight</button>
+    <button type="button" class="toggle" id="tilt" aria-pressed="true"><span class="switch" aria-hidden="true"></span>Tilt</button>
+    <p class="clock" id="clock" aria-live="off">Local times, live · drag to spin</p>
+    <button type="button" class="btn" id="pause" aria-pressed="false">Pause</button>
+  </div>
+
+  <h2 class="visually-hidden">Local times</h2>
+  <ul id="times" class="visually-hidden"></ul>
+</main>
+
+<p class="credit">Imagery: NASA Blue Marble and Black Marble</p>
+<script src="../shared/globe.js"></script>
+<script src="../shared/world.js"></script>
+</body>
+</html>
