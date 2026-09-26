@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Harshvardan S M</title>
     <meta name="description" content="Technical projects showcasing data engineering, machine learning, and IoT expertise.">
-    <link rel="icon" href="./Logos/HarshProfile.png" type="image/png" />
+    <link rel="icon" href="assets/images/profile.png" type="image/png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -605,14 +605,15 @@
         <div class="container">
             <div class="nav-content">
                 <a href="index.html" class="nav-logo">
-                    <span class="nav-logo-accent">&lt;</span>HSM<span class="nav-logo-accent">/&gt;</span>
+                    Harshvardan S M
                 </a>
                 <div class="nav-links">
                     <a href="index.html#about" class="nav-link">About</a>
                     <a href="index.html#experience" class="nav-link">Experience</a>
+                    <a href="projects.html" class="nav-link active">Projects</a>
                     <a href="index.html#skills" class="nav-link">Skills</a>
                     <a href="index.html#education" class="nav-link">Education</a>
-                    <a href="projects.html" class="nav-link active">Projects</a>
+                    <a href="index.html#contact" class="nav-link">Contact</a>
                     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                         <i class="fas fa-sun"></i>
                         <i class="fas fa-moon"></i>
@@ -623,24 +624,17 @@
     </nav>
 
     <header class="page-header">
-        <div class="page-header-bg"></div>
-        <div class="page-header-glow"></div>
         <div class="container">
             <div class="page-header-content">
                 <a href="index.html" class="back-btn">
                     <i class="fas fa-arrow-left"></i>
-                    Back to Home
+                    Home
                 </a>
-                <div class="page-badge">
-                    <i class="fas fa-folder-open"></i>
-                    Portfolio
-                </div>
                 <h1 class="page-title">
-                    Technical <span class="page-title-gradient">Projects</span>
+                    Projects
                 </h1>
                 <p class="page-subtitle">
-                    End-to-end systems showcasing data engineering, machine learning, 
-                    computer vision, and IoT expertise.
+                    Data engineering, machine learning, computer vision and IoT work.
                 </p>
             </div>
         </div>
@@ -649,10 +643,10 @@
     <section class="projects-section">
         <div class="container">
             <div class="filter-tabs reveal">
-                <button class="filter-tab active" data-filter="all">All Projects</button>
-                <button class="filter-tab" data-filter="ml">Machine Learning</button>
-                <button class="filter-tab" data-filter="data">Data Engineering</button>
-                <button class="filter-tab" data-filter="iot">IoT & Hardware</button>
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="ml">Machine learning</button>
+                <button class="filter-tab" data-filter="data">Data engineering</button>
+                <button class="filter-tab" data-filter="iot">IoT and hardware</button>
                 <button class="filter-tab" data-filter="healthcare">Healthcare</button>
             </div>
 
@@ -686,14 +680,14 @@
                     <div class="footer-name">Harshvardan S M</div>
                     <div class="footer-location">
                         <i class="fas fa-map-marker-alt"></i>
-                        Sydney, NSW, Australia • Available for opportunities
+                        Sydney, NSW, Australia
                     </div>
                 </div>
                 <div class="footer-right">
                     <p class="footer-credit">
-                        Developed using <a href="https://claude.ai" target="_blank">Claude Code</a> by Anthropic
+                        Built with <a href="https://claude.ai" target="_blank" rel="noopener">Claude Code</a>
                     </p>
-                    <p class="footer-copyright">© 2025 Harshvardan S M. All rights reserved.</p>
+                    <p class="footer-copyright">© 2026 Harshvardan S M</p>
                 </div>
             </div>
         </div>
@@ -728,9 +722,9 @@
                 title: 'Product Recommendation System',
                 subtitle: 'Full Data Pipeline & ML',
                 category: 'ml',
-                folder: 'Product Recommendation System',
+                folder: 'projects/product-recommendation',
                 technologies: ['Python', 'SQL', 'scikit-learn', 'MySQL', 'Collaborative Filtering'],
-                description: 'Built a complete recommendation engine from scratch - database schema design, ETL pipeline, and collaborative filtering model achieving 78% accuracy. Learned end-to-end data pipeline development and recommendation algorithms.',
+                description: 'A recommendation engine built from scratch: database schema design, ETL pipeline and a collaborative filtering model with 78% accuracy.',
                 githubLink: 'https://github.com/Harsh-D14',
                 articleLink: null,
                 images: ['thumbnail.jpg'],
@@ -741,9 +735,9 @@
                 title: 'AI-Powered Task Management System',
                 subtitle: 'NLP & Automation',
                 category: 'ml',
-                folder: 'Task Management System',
+                folder: 'projects/task-management',
                 technologies: ['Python', 'NLP', 'Streamlit', 'scikit-learn', 'TF-IDF'],
-                description: 'Automated task categorization system using NLP and sentiment analysis. Built data ingestion pipeline, classification model, and interactive Streamlit dashboard. Reduced manual categorization work by 85%.',
+                description: 'Automated task categorisation system using NLP and sentiment analysis. Built data ingestion pipeline, classification model, and interactive Streamlit dashboard. Reduced manual categorisation work by 85%.',
                 githubLink: 'https://github.com/Harsh-D14',
                 articleLink: null,
                 images: ['thumbnail.jpg']
@@ -753,7 +747,7 @@
                 title: 'Healthcare Mobile Application',
                 subtitle: 'Johns Hopkins Collaboration',
                 category: 'healthcare',
-                folder: 'CoviCare Vee+Svasta',
+                folder: 'projects/healthcare-app',
                 technologies: ['Python', 'Mobile Dev', 'ETL', 'Firebase', 'Data Analytics'],
                 description: 'Collaborated with Johns Hopkins University on a mobile healthcare application for symptom tracking and telemedicine. Designed backend data architecture and analytics pipeline. Deployed to 500+ users.',
                 githubLink: null,
@@ -766,19 +760,19 @@
                 title: 'Autonomous Delivery Drone',
                 subtitle: 'IoT, Computer Vision & Hardware',
                 category: 'iot',
-                folder: 'Sidewalk Delivery Drone',
+                folder: 'projects/delivery-drone',
                 technologies: ['Raspberry Pi', 'Python', 'OpenCV', 'NaVIC GPS', 'IoT'],
-                description: 'Built an autonomous navigation system for a delivery drone with real-time computer vision obstacle detection and GPS waypoint navigation. Learned hardware-software integration and real-time processing.',
+                description: 'An autonomous navigation system for a delivery drone, with real-time computer vision obstacle detection and GPS waypoint navigation.',
                 githubLink: null,
                 articleLink: null,
-                images: ['image1.jpeg', 'image2.jpeg']
+                images: ['image1.jpg', 'image2.jpg']
             },
             {
                 id: 'project5',
                 title: 'IoT Contactless Elevator Control',
                 subtitle: 'Published Research Paper',
                 category: 'iot',
-                folder: 'Contactless Elevator',
+                folder: 'projects/contactless-elevator',
                 technologies: ['Python', 'OpenCV', 'IoT Sensors', 'Gesture Recognition', 'Raspberry Pi'],
                 description: 'Published research on a contactless elevator control system using computer vision and gesture recognition. Built working prototype with real-time image processing and statistical analysis on system accuracy.',
                 githubLink: null,
@@ -787,12 +781,12 @@
             },
             {
                 id: 'project6',
-                title: 'Smart Toy for Specially-Abled Children',
+                title: 'Smart Toy for Children with Disabilities',
                 subtitle: 'Toycathon National Winner',
                 category: 'iot',
-                folder: 'Toycathon',
+                folder: 'projects/toycathon-smart-toy',
                 technologies: ['IoT', 'Sensors', 'Arduino', 'Real-time Processing', 'Firebase'],
-                description: 'National winning project from Toycathon 2021-22. Built IoT-based assistive technology solution with sensor integration, data collection, real-time processing, and dashboard interface. Led team of 3.',
+                description: 'National winning project from Toycathon 2021-22. Built IoT-based assistive technology solution with sensor integration, data collection, real-time processing, and dashboard interface. Led a team of three.',
                 githubLink: null,
                 articleLink: null,
                 images: ['image1.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg']
@@ -802,7 +796,7 @@
                 title: 'ADAS Data Pipeline Automation',
                 subtitle: 'Continental Automotive',
                 category: 'data',
-                folder: 'Logos',
+                folder: 'projects/continental-adas',
                 technologies: ['Python', 'SQL', 'ETL', 'Data Quality', 'Monitoring'],
                 description: 'Production-grade ETL pipelines at Continental processing sensor data from cameras, radar, and lidar. Built job scheduling, error handling, and monitoring dashboards. Reduced manual processing by 95%.',
                 githubLink: null,
@@ -815,9 +809,9 @@
                 title: 'DIY NAS Server with Raspberry Pi4',
                 subtitle: 'Own Cloud Storage Server',
                 category: 'iot',
-                folder: 'RPi_server',
+                folder: 'projects/rpi-nas-server',
                 technologies: ['Linux', 'Shell Scripting', 'Network Hosting','Databases', 'SSH', 'Server Hosting'],
-                description: 'Built a self hosted network storage server using Raspberry Pi (Linux).',
+                description: 'A self-hosted network storage server on a Raspberry Pi 4 running Linux.',
                 githubLink: null,
                 articleLink:'https://www.linkedin.com/pulse/my-journey-building-diy-nas-server-raspberry-pi-4-privacy-s-m-rqlnf/?trackingId=26QhC%2F%2FSTYSo52r7CvmS0Q%3D%3D',
                 images: [

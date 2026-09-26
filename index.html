@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harshvardan S M | Data Engineer & ML Specialist</title>
-    <meta name="description" content="Data Engineer specializing in Machine Learning, IoT & Computer Vision. Ex-Continental Automotive with proven impact in automation and data pipeline development.">
-    <link rel="icon" href="./Logos/HarshProfile.png" type="image/png" />
+    <title>Harshvardan S M | Data and AI Engineer</title>
+    <meta name="description" content="Harshvardan S M, data and AI engineer in Sydney. Data pipelines, machine learning and AI tooling.">
+    <link rel="icon" href="assets/images/profile.png" type="image/png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -1170,6 +1169,55 @@
                 left: 4px;
             }
         }
+
+        /* Restructure 2026-09-26: quieter layout */
+        .hero { min-height: 88vh; }
+        .hero-title { color: var(--text-primary); }
+        .section-header { text-align: left; margin-bottom: 40px; }
+        .section-subtitle { margin: 0; }
+        .section-title { font-size: clamp(1.75rem, 3vw, 2.25rem); }
+        section { padding: 80px 0; }
+        #about, #projects, #education { background: var(--bg-secondary); }
+
+        .about-single { max-width: 760px; }
+        .about-single p { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 20px; }
+
+        .timeline-container { max-width: 860px; margin: 0; }
+        .timeline-item { padding-left: 48px; }
+        .timeline-marker { left: 0; }
+        @media (max-width: 768px) {
+            .timeline-item { padding-left: 0; padding-bottom: 20px; }
+            .timeline-marker { display: none; }
+        }
+        .highlight-card:hover, .award-card:hover, .skill-category:hover, .education-card:hover,
+        .timeline-card:hover { transform: none; }
+
+        .project-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .project-item {
+            display: block;
+            padding: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            color: inherit;
+            text-decoration: none;
+            transition: border-color var(--transition-fast);
+        }
+        .project-item:hover { border-color: var(--accent-primary); }
+        .project-item h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+        .project-item p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 12px; }
+        .project-stack { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); }
+        .project-list-footer { margin-top: 32px; }
+
+        .awards-grid { margin-top: 24px; }
+        .skill-category-title { margin-bottom: 16px; }
+
+        .contact-links { display: flex; flex-wrap: wrap; gap: 12px; }
+        .footer-location { display: block; }
     </style>
 </head>
 <body>
@@ -1177,15 +1225,14 @@
     <nav id="navbar">
         <div class="container">
             <div class="nav-content">
-                <a href="#" class="nav-logo">
-                    <span class="nav-logo-accent">&lt;</span>HSM<span class="nav-logo-accent">/&gt;</span>
-                </a>
+                <a href="#" class="nav-logo">Harshvardan S M</a>
                 <div class="nav-links">
                     <a href="#about" class="nav-link">About</a>
                     <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#projects" class="nav-link">Projects</a>
                     <a href="#skills" class="nav-link">Skills</a>
                     <a href="#education" class="nav-link">Education</a>
-                    <a href="projects.html" class="nav-link">Projects</a>
+                    <a href="#contact" class="nav-link">Contact</a>
                     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                         <i class="fas fa-sun"></i>
                         <i class="fas fa-moon"></i>
@@ -1195,75 +1242,45 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-glow hero-glow-1"></div>
-        <div class="hero-glow hero-glow-2"></div>
-        
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <div class="hero-badge">
-                        <i class="fas fa-circle"></i>
-                        Available for opportunities in Sydney
-                    </div>
-                    <h1 class="hero-title">
-                        <span class="hero-title-gradient">Harshvardan S M</span>
-                    </h1>
+                    <h1 class="hero-title">Harshvardan S M</h1>
                     <div class="hero-subtitle">
-                        <span>Data Engineer</span>
+                        <span>Data and AI Engineer</span>
                         <span class="separator"></span>
-                        <span>Machine Learning</span>
-                        <span class="separator"></span>
-                        <span>IoT & Computer Vision</span>
+                        <span>Sydney, NSW</span>
                     </div>
                     <p class="hero-description">
-                        Building reliable data systems that deliver measurable impact. 
-                        At Continental Automotive, I automated pipelines that replaced 95% of manual processing — 
-                        turning a 9-month internship into 12 months with a performance bonus.
+                        I build data pipelines and AI systems. At Continental AG I automated ETL pipelines
+                        that cut manual data processing by 95%. I now build AI tooling and deliver AI training
+                        at Western Sydney Tech Innovators.
                     </p>
                     <div class="hero-actions">
-                        <a href="projects.html" class="btn btn-primary">
-                            <i class="fas fa-folder-open"></i>
-                            View Projects
-                        </a>
-                        <a href="https://linkedin.com/in/harshvardan" target="_blank" class="btn btn-secondary">
-                            <i class="fab fa-linkedin"></i>
-                            Connect on LinkedIn
+                        <a href="#projects" class="btn btn-primary">View projects</a>
+                        <a href="mailto:harsh.d14@proton.me" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i>
+                            Email
                         </a>
                     </div>
                 </div>
 
                 <div class="profile-card">
                     <div class="profile-image">
-                        <img src="./Logos/HarshProfile.png" alt="Harshvardan S M"
-                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23f59e0b%22/%3E%3Ctext x=%2250%22 y=%2255%22 text-anchor=%22middle%22 font-size=%2236%22 fill=%22%23000%22 font-weight=%22bold%22%3EHSM%3C/text%3E%3C/svg%3E'">
+                        <img src="assets/images/profile.png" alt="Harshvardan S M">
                     </div>
                     <h3 class="profile-name">Harshvardan S M</h3>
-                    <p class="profile-title">Applied AI & Automation Engineer</p>
-                    <div class="profile-stats">
-                        <div class="stat">
-                            <div class="stat-value">9.33</div>
-                            <div class="stat-label">MTech GPA</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">National Winner</div>
-                            <div class="stat-label">Outranked 7,000+</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">1 Year</div>
-                            <div class="stat-label">Ex-Continental</div>
-                        </div>
-                    </div>
+                    <p class="profile-title">Data and AI Engineer</p>
                     <div class="profile-socials">
-                        <a href="https://linkedin.com/in/harshvardan" target="_blank" class="social-link" title="LinkedIn">
+                        <a href="https://linkedin.com/in/harshvardan" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="https://github.com/Harsh-D14" target="_blank" class="social-link" title="GitHub">
+                        <a href="https://github.com/Harsh-D14" target="_blank" rel="noopener" class="social-link" title="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://leetcode.com/u/Harsh-D14" target="_blank" class="social-link" title="LeetCode">
+                        <a href="https://leetcode.com/u/Harsh-D14" target="_blank" rel="noopener" class="social-link" title="LeetCode">
                             <i class="fas fa-code"></i>
                         </a>
                         <a href="mailto:harsh.d14@proton.me" class="social-link" title="Email">
@@ -1275,98 +1292,35 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About -->
     <section id="about">
         <div class="container">
             <div class="section-header reveal">
-                <div class="section-badge">
-                    <i class="fas fa-user"></i>
-                    About Me
-                </div>
-                <h2 class="section-title">Building Systems That Work</h2>
-                <p class="section-subtitle">
-                    "A jack of all trades is a master of none, but oftentimes better than a master of one" 
-                </p>
-                <p class="section-subtitle">
-                    A generalist data engineer who can build pipelines, train models, and present to both technical and non-technical stakeholders.
-                </p>
+                <h2 class="section-title">About</h2>
             </div>
-
-            <div class="about-grid">
-                <div class="about-content reveal">
-                    <h3>From Sensors to Insights</h3>
-                    <p>
-                        I'm a data engineer who enjoys building things that work reliably and make people's lives easier. 
-                        At Continental Automotive, I spent a year analyzing production sensor data and building automated pipelines 
-                        that replaced 95% of manual processing work.
-                    </p>
-                    <p>
-                        What started as a 9-month internship turned into 12 months because the automation actually delivered value, 
-                        and I got a performance bonus for it — which felt pretty good.
-                    </p>
-                    <p>
-                        I've worked on a pretty wide range of things: recommendation systems, NLP-based automation, 
-                        IoT projects with actual hardware, computer vision systems, and I even published a research paper along the way.
-                    </p>
-
-                    <div class="about-highlights">
-                        <div class="highlight-card">
-                            <div class="highlight-icon">
-                                <i class="fas fa-database"></i>
-                            </div>
-                            <div class="highlight-title">Data Engineering</div>
-                            <div class="highlight-text">ETL pipelines, data modeling, production systems</div>
-                        </div>
-                        <div class="highlight-card">
-                            <div class="highlight-icon">
-                                <i class="fas fa-brain"></i>
-                            </div>
-                            <div class="highlight-title">Machine Learning</div>
-                            <div class="highlight-text">Classification, NLP, recommendation systems</div>
-                        </div>
-                        <div class="highlight-card">
-                            <div class="highlight-icon">
-                                <i class="fas fa-microchip"></i>
-                            </div>
-                            <div class="highlight-title">IoT & Hardware</div>
-                            <div class="highlight-text">Raspberry Pi, sensors, real-time processing</div>
-                        </div>
-                        <div class="highlight-card">
-                            <div class="highlight-icon">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="highlight-title">Computer Vision</div>
-                            <div class="highlight-text">OpenCV, object detection, gesture recognition</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-container reveal">
-                    <p style="color: var(--text-secondary); margin-bottom: 24px;">
-                        Right now I'm learning modern AI development tools like Claude Code and GitHub Copilot 
-                        because I think AI-assisted development is going to be huge.
-                    </p>
-                    <p style="color: var(--text-secondary);">
-                        I'm based in Sydney and looking for opportunities where I can contribute to real systems 
-                        while continuing to learn and grow alongside experienced teams.
-                    </p>
-                </div>
+            <div class="about-single reveal">
+                <p>
+                    I am a data engineer working on AI delivery in Sydney. At Western Sydney Tech Innovators
+                    I build workshops, training and the internal systems the organisation runs on, across its
+                    consultation, training and community programs.
+                </p>
+                <p>
+                    Before moving to Australia I spent a year on the ADAS team at Continental AG in India,
+                    building automated pipelines for automotive sensor data from cameras, radar and lidar.
+                </p>
+                <p>
+                    Earlier work covers recommendation systems, NLP automation, computer vision and IoT hardware,
+                    including a national Toycathon win and a published research paper.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Experience -->
     <section id="experience">
         <div class="container">
             <div class="section-header reveal">
-                <div class="section-badge">
-                    <i class="fas fa-briefcase"></i>
-                    Experience
-                </div>
-                <h2 class="section-title">Professional Journey</h2>
-                <p class="section-subtitle">
-                    Building automation systems and data pipelines across automotive and tech industries.
-                </p>
+                <h2 class="section-title">Experience</h2>
             </div>
 
             <div class="timeline-container reveal">
@@ -1375,23 +1329,49 @@
                     <div class="timeline-card">
                         <div class="timeline-header">
                             <div>
-                                <h3 class="timeline-title">ADAS Engineer – Data Analysis & Automation</h3>
-                                <p class="timeline-company">Continental AG Technical Center India (Now AUMOVIO)</p>
+                                <h3 class="timeline-title">AI Engineer</h3>
+                                <p class="timeline-company">Western Sydney Tech Innovators, Parramatta NSW</p>
                             </div>
-                            <span class="timeline-date">Jul 2023 – Jul 2024</span>
+                            <span class="timeline-date">Apr 2026 to Present</span>
+                        </div>
+                        <ul class="timeline-achievements">
+                            <li>Deliver AI workshops and training for working professionals and community groups</li>
+                            <li>Work across the consultation, training and community programs</li>
+                            <li>Five club engineers take delegation from me on delivery</li>
+                            <li>Built the internal tooling the organisation runs on, including its first automated reporting routine</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="timeline-title">Volunteer</h3>
+                                <p class="timeline-company">Western Sydney Tech Innovators, Parramatta NSW</p>
+                            </div>
+                            <span class="timeline-date">Feb 2026 to Mar 2026</span>
                         </div>
                         <p class="timeline-description">
-                            Worked on the Advanced Driver Assistance Systems (ADAS) team analyzing sensor data from automotive testing systems. 
-                            Started as 9-month internship, extended to 12 months based on performance.
+                            Technology mentoring for non-technical community members.
                         </p>
-                        <ul class="timeline-achievements">
-                            <li>Built end-to-end automated ETL pipelines using Python and SQL that reduced manual data processing work by 95%</li>
-                            <li>Analyzed data from multiple sensor types (cameras, radar, lidar) to identify which sources yielded the most useful information for simulations</li>
-                            <li>Designed job scheduling and orchestration logic including error handling, logging systems, and monitoring dashboards</li>
-                            <li>Worked directly with enterprise production databases containing millions of records with optimized SQL queries</li>
-                            <li>Presented technical findings to external BMW partners who were part of the project</li>
-                            <li>Received cash performance bonus for measurable engineering impact</li>
-                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-card">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="timeline-title">Volunteer</h3>
+                                <p class="timeline-company">Schnellstart, Switzerland</p>
+                            </div>
+                            <span class="timeline-date">Feb 2026 to Present</span>
+                        </div>
+                        <p class="timeline-description">
+                            Selected for a mentor-guided program in applied AI development and workflow automation.
+                        </p>
                     </div>
                 </div>
 
@@ -1401,17 +1381,14 @@
                         <div class="timeline-header">
                             <div>
                                 <h3 class="timeline-title">L1 Data Associate</h3>
-                                <p class="timeline-company">Infotact Solutions (Remote, India)</p>
+                                <p class="timeline-company">Infotact Solutions, India (remote)</p>
                             </div>
-                            <span class="timeline-date">Jun 2025 – Aug 2025</span>
+                            <span class="timeline-date">Jun 2025 to Aug 2025</span>
                         </div>
-                        <p class="timeline-description">
-                            Short-term contract processing and analyzing large datasets for client projects.
-                        </p>
                         <ul class="timeline-achievements">
-                            <li>Processed and analyzed large datasets (100,000+ records) using SQL and Python</li>
-                            <li>Built reusable data cleaning and validation scripts, replacing manual spreadsheet work with automated workflows</li>
-                            <li>Created data quality reports and visualizations to communicate findings to stakeholders</li>
+                            <li>Processed and analysed datasets of more than 100,000 records using SQL and Python</li>
+                            <li>Built reusable data cleaning and validation scripts that replaced manual spreadsheet work</li>
+                            <li>Produced data quality reports and visualisations for stakeholders</li>
                         </ul>
                     </div>
                 </div>
@@ -1421,51 +1398,21 @@
                     <div class="timeline-card">
                         <div class="timeline-header">
                             <div>
-                                <h3 class="timeline-title">Technical Upskilling – Modern AI Development</h3>
-                                <p class="timeline-company">Self-directed Learning</p>
+                                <h3 class="timeline-title">ADAS Engineer, Data Analysis and Automation</h3>
+                                <p class="timeline-company">Continental AG Technical Center India, now AUMOVIO</p>
                             </div>
-                            <span class="timeline-date">Sep 2025 – Present</span>
+                            <span class="timeline-date">Jul 2023 to Jul 2024</span>
                         </div>
                         <p class="timeline-description">
-                            Currently learning and experimenting with AI-assisted development tools.
+                            Advanced Driver Assistance Systems team, analysing sensor data from automotive testing.
+                            A nine month internship, extended to twelve months with a performance bonus.
                         </p>
                         <ul class="timeline-achievements">
-                            <li>Working with Claude Code for agentic coding where AI handles entire coding tasks end-to-end</li>
-                            <li>GitHub Copilot for code completion and suggestions</li>
-                            <li>Exploring how these tools can make data engineering work more productive</li>
-                            <li>Staying current with developments in AI/ML tooling and modern data platforms</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-card">
-                        <div class="timeline-header">
-                            <div>
-                                <h3 class="timeline-title">Mentor & Volunteer</h3>
-                                <p class="timeline-company">Western Sydney Tech Innovators (Sydney, NSW, Australia)</p>
-                            </div>
-                            <span class="timeline-date">Feb 2026 – Present</span>
-                        </div>
-                        <p class="timeline-description">
-                           Empowering non-technical communities through technology mentoring and digital adoption
-                        </p>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-card">
-                        <div class="timeline-header">
-                            <div>
-                                <h3 class="timeline-title">Volunteer</h3>
-                                <p class="timeline-company">Schnellstart (Switzerland)</p>
-                            </div>
-                            <span class="timeline-date">Feb 2026 – Present</span>
-                        </div>
-                        <p class="timeline-description">
-                           Selected for mentor-guided program focused on applied AI development and workflow automation
-                        </p>
+                            <li>Built end to end automated ETL pipelines in Python and SQL that cut manual data processing by 95%</li>
+                            <li>Analysed camera, radar and lidar data to identify which sources were most useful for simulation</li>
+                            <li>Designed job scheduling and orchestration with error handling, logging and monitoring dashboards</li>
+                            <li>Worked with production databases of millions of records using optimised SQL</li>
+                            <li>Presented technical findings to BMW partners on the project</li>
                         </ul>
                     </div>
                 </div>
@@ -1473,28 +1420,45 @@
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Projects -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Selected projects</h2>
+            </div>
+            <div class="project-list reveal">
+                <a href="projects.html" class="project-item">
+                    <h3>Product recommendation system</h3>
+                    <p>Database schema, ETL pipeline and a collaborative filtering model.</p>
+                    <span class="project-stack">Python, SQL, scikit-learn, MySQL</span>
+                </a>
+                <a href="projects.html" class="project-item">
+                    <h3>Healthcare mobile application</h3>
+                    <p>Backend data architecture and analytics for a symptom tracking and telemedicine app, with Johns Hopkins University.</p>
+                    <span class="project-stack">Python, Firebase, ETL</span>
+                </a>
+                <a href="projects.html" class="project-item">
+                    <h3>Raspberry Pi network storage server</h3>
+                    <p>A self-hosted storage server on a Raspberry Pi 4 running Linux.</p>
+                    <span class="project-stack">Linux, shell scripting, SSH</span>
+                </a>
+            </div>
+            <div class="project-list-footer reveal">
+                <a href="projects.html" class="btn btn-secondary">All projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
     <section id="skills">
         <div class="container">
             <div class="section-header reveal">
-                <div class="section-badge">
-                    <i class="fas fa-cogs"></i>
-                    Skills & Expertise
-                </div>
-                <h2 class="section-title">Technical Toolkit</h2>
-                <p class="section-subtitle">
-                    A comprehensive skill set spanning data engineering, machine learning, and full-stack development.
-                </p>
+                <h2 class="section-title">Skills</h2>
             </div>
 
             <div class="skills-grid reveal">
                 <div class="skill-category">
-                    <div class="skill-category-header">
-                        <div class="skill-category-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <h3 class="skill-category-title">Programming Languages</h3>
-                    </div>
+                    <h3 class="skill-category-title">Languages</h3>
                     <div class="skill-tags">
                         <span class="skill-tag primary">Python</span>
                         <span class="skill-tag primary">SQL</span>
@@ -1505,222 +1469,132 @@
                 </div>
 
                 <div class="skill-category">
-                    <div class="skill-category-header">
-                        <div class="skill-category-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <h3 class="skill-category-title">Data Engineering</h3>
-                    </div>
+                    <h3 class="skill-category-title">Data engineering</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag primary">ETL/ELT Pipelines</span>
-                        <span class="skill-tag">Data Modeling</span>
+                        <span class="skill-tag primary">ETL and ELT pipelines</span>
+                        <span class="skill-tag">Data modelling</span>
                         <span class="skill-tag">MySQL</span>
                         <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">Job Scheduling</span>
-                        <span class="skill-tag">Data Quality</span>
+                        <span class="skill-tag">Job scheduling</span>
+                        <span class="skill-tag">Data quality</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <div class="skill-category-header">
-                        <div class="skill-category-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <h3 class="skill-category-title">Machine Learning & AI</h3>
-                    </div>
+                    <h3 class="skill-category-title">Machine learning</h3>
                     <div class="skill-tags">
                         <span class="skill-tag primary">scikit-learn</span>
                         <span class="skill-tag">TensorFlow</span>
                         <span class="skill-tag">NLP</span>
                         <span class="skill-tag">Classification</span>
                         <span class="skill-tag">Clustering</span>
-                        <span class="skill-tag">Recommendation Systems</span>
+                        <span class="skill-tag">Recommendation systems</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <div class="skill-category-header">
-                        <div class="skill-category-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <h3 class="skill-category-title">Data Visualization</h3>
+                    <h3 class="skill-category-title">AI development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag primary">Claude Code</span>
+                        <span class="skill-tag">Prompt engineering</span>
+                        <span class="skill-tag">Ollama</span>
                     </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Visualisation</h3>
                     <div class="skill-tags">
                         <span class="skill-tag primary">Tableau</span>
+                        <span class="skill-tag">Power BI</span>
                         <span class="skill-tag">Streamlit</span>
                         <span class="skill-tag">Matplotlib</span>
                         <span class="skill-tag">Seaborn</span>
-                        <span class="skill-tag">Power BI</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <div class="skill-category-header">
-                        <div class="skill-category-icon">
-                            <i class="fas fa-cloud"></i>
-                        </div>
-                        <h3 class="skill-category-title">Cloud & Infrastructure</h3>
-                    </div>
+                    <h3 class="skill-category-title">Cloud and infrastructure</h3>
                     <div class="skill-tags">
                         <span class="skill-tag">AWS (S3, EC2)</span>
                         <span class="skill-tag">Docker</span>
                         <span class="skill-tag">Git</span>
                         <span class="skill-tag">Snowflake</span>
+                        <span class="skill-tag">Linux</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <div class="skill-category-header">
-                        <div class="skill-category-icon">
-                            <i class="fas fa-microchip"></i>
-                        </div>
-                        <h3 class="skill-category-title">IoT & Computer Vision</h3>
-                    </div>
+                    <h3 class="skill-category-title">IoT and computer vision</h3>
                     <div class="skill-tags">
                         <span class="skill-tag primary">OpenCV</span>
                         <span class="skill-tag">Raspberry Pi</span>
-                        <span class="skill-tag">Sensor Integration</span>
+                        <span class="skill-tag">Sensor integration</span>
                         <span class="skill-tag">NaVIC GPS</span>
-                        <span class="skill-tag">Real-time Processing</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Charts -->
-            <div class="charts-grid reveal">
-                <div class="chart-card">
-                    <h3 class="chart-title">
-                        <i class="fas fa-chart-pie"></i>
-                        Language Proficiency
-                    </h3>
-                    <div class="chart-wrapper">
-                        <canvas id="languageChart"></canvas>
-                    </div>
-                </div>
-                <div class="chart-card">
-                    <h3 class="chart-title">
-                        <i class="fas fa-spider"></i>
-                        Core Competencies
-                    </h3>
-                    <div class="chart-wrapper">
-                        <canvas id="skillChart"></canvas>
-                    </div>
-                </div>
-                <div class="chart-card">
-                    <h3 class="chart-title">
-                        <i class="fas fa-chart-bar"></i>
-                        Domain Expertise
-                    </h3>
-                    <div class="chart-wrapper">
-                        <canvas id="experienceChart"></canvas>
+                        <span class="skill-tag">Real-time processing</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Education Section -->
+    <!-- Education -->
     <section id="education">
         <div class="container">
             <div class="section-header reveal">
-                <div class="section-badge">
-                    <i class="fas fa-graduation-cap"></i>
-                    Education
-                </div>
-                <h2 class="section-title">Academic Background</h2>
-                <p class="section-subtitle">
-                    Strong academic foundation in Data Science and Computer Science.
-                </p>
+                <h2 class="section-title">Education</h2>
             </div>
 
             <div class="education-grid reveal">
                 <div class="education-card">
                     <div class="education-header">
                         <div>
-                            <h3 class="education-degree">Master of Technology (MTech)</h3>
-                            <p class="education-school">Data Science — Jain University, Bengaluru</p>
+                            <h3 class="education-degree">Master of Technology, Data Science</h3>
+                            <p class="education-school">Jain University, Bengaluru</p>
                         </div>
                         <div class="education-gpa">9.33/10</div>
                     </div>
-                    <p class="education-date">2022 – 2024</p>
+                    <p class="education-date">2022 to 2024</p>
                     <p class="education-highlights">
-                        <strong>Key Coursework:</strong> Data Engineering & Pipelines, Statistical Analysis & Modeling, 
-                        Machine Learning (supervised, unsupervised, deep learning), Python Programming, 
-                        Data Visualization, NLP, Data Mining, Big Data Analytics
+                        Coursework: data engineering and pipelines, statistical analysis and modelling,
+                        machine learning, NLP, data mining, big data analytics, data visualisation.
                     </p>
                 </div>
 
                 <div class="education-card">
                     <div class="education-header">
                         <div>
-                            <h3 class="education-degree">Bachelor of Engineering (BE)</h3>
-                            <p class="education-school">Computer Science and Engineering — Sona College of Technology, Tamil Nadu</p>
+                            <h3 class="education-degree">Bachelor of Engineering, Computer Science and Engineering</h3>
+                            <p class="education-school">Sona College of Technology, Tamil Nadu</p>
                         </div>
                         <div class="education-gpa">8.82/10</div>
                     </div>
-                    <p class="education-date">2018 – 2022</p>
+                    <p class="education-date">2018 to 2022</p>
                     <p class="education-highlights">
-                        Built foundational skills in programming, algorithms, data structures, databases, 
-                        operating systems, and software engineering. Introduced to machine learning and AI concepts during final year.
+                        Coursework: programming, algorithms, data structures, databases, operating systems,
+                        software engineering.
                     </p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Awards Section -->
-    <section id="awards">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-badge">
-                    <i class="fas fa-trophy"></i>
-                    Recognition
-                </div>
-                <h2 class="section-title">Awards & Publications</h2>
-                <p class="section-subtitle">
-                    Achievements that validate impact and innovation.
-                </p>
             </div>
 
             <div class="awards-grid reveal">
                 <div class="award-card">
-                    <div class="award-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
                     <div class="award-content">
-                        <h3 class="award-title">National Winner – Toycathon 2021-2022</h3>
-                        <p class="award-org">Government of India Initiative • 7,000+ participants</p>
+                        <h3 class="award-title">National Winner, Toycathon 2021-22</h3>
+                        <p class="award-org">Government of India, more than 7,000 participants</p>
                         <p class="award-description">
-                            Led a team of 3 to win a national 36-hour innovation competition. 
-                            Built a complete IoT-based assistive technology solution for specially-abled children from scratch.
+                            Led a team of three in a 36 hour national competition. Built an IoT assistive toy
+                            for children with disabilities.
                         </p>
                     </div>
                 </div>
 
                 <div class="award-card">
-                    <div class="award-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
                     <div class="award-content">
-                        <h3 class="award-title">Performance Bonus – Continental Automotive</h3>
-                        <p class="award-org">Measurable Engineering Impact</p>
-                        <p class="award-description">
-                            Received cash performance bonus for delivering 95% reduction in manual processing. 
-                            Contract extended from planned 9 months to 12 months based on work delivered.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="award-card">
-                    <div class="award-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <div class="award-content">
-                        <h3 class="award-title">Published Research Paper</h3>
+                        <h3 class="award-title">Published paper</h3>
                         <p class="award-org">IoT-Based Contactless Elevator Control System</p>
                         <p class="award-description">
-                            Published research on a contactless elevator control system using computer vision and gesture recognition. 
-                            Built working prototype with IoT sensors and real-time image processing.
+                            A contactless elevator control system using computer vision and gesture recognition,
+                            with a working prototype.
                         </p>
                     </div>
                 </div>
@@ -1728,18 +1602,25 @@
         </div>
     </section>
 
-    <!-- Projects CTA -->
-    <section class="projects-cta">
+    <!-- Contact -->
+    <section id="contact">
         <div class="container">
-            <div class="cta-content reveal">
-                <h2 class="cta-title">Want to See My Work?</h2>
-                <p class="cta-subtitle">
-                    From recommendation systems to autonomous drones — explore the projects 
-                    that demonstrate my end-to-end engineering capabilities.
-                </p>
-                <a href="projects.html" class="btn btn-primary">
-                    <i class="fas fa-folder-open"></i>
-                    View All Projects
+            <div class="section-header reveal">
+                <h2 class="section-title">Contact</h2>
+                <p class="section-subtitle">Based in Sydney, NSW. Email is the best way to reach me.</p>
+            </div>
+            <div class="contact-links reveal">
+                <a href="mailto:harsh.d14@proton.me" class="btn btn-primary">
+                    <i class="fas fa-envelope"></i>
+                    harsh.d14@proton.me
+                </a>
+                <a href="https://linkedin.com/in/harshvardan" target="_blank" rel="noopener" class="btn btn-secondary">
+                    <i class="fab fa-linkedin-in"></i>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/Harsh-D14" target="_blank" rel="noopener" class="btn btn-secondary">
+                    <i class="fab fa-github"></i>
+                    GitHub
                 </a>
             </div>
         </div>
@@ -1751,18 +1632,13 @@
             <div class="footer-content">
                 <div class="footer-left">
                     <div class="footer-name">Harshvardan S M</div>
-                    <div class="footer-location">
-                        <i class="fas fa-map-marker-alt"></i>
-                        Sydney, NSW, Australia • Available for opportunities
-                    </div>
+                    <div class="footer-location">Sydney, NSW, Australia</div>
                 </div>
                 <div class="footer-right">
                     <p class="footer-credit">
-                        Developed using <a href="https://claude.ai" target="_blank">Claude Code</a> by Anthropic
+                        Built with <a href="https://claude.ai" target="_blank" rel="noopener">Claude Code</a>
                     </p>
-                    <p class="footer-copyright">
-                        © 2025 Harshvardan S M. All rights reserved.
-                    </p>
+                    <p class="footer-copyright">© 2026 Harshvardan S M</p>
                 </div>
             </div>
         </div>
@@ -1782,9 +1658,6 @@
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
-            
-            // Update charts if they exist
-            if (window.languageChart) updateChartColors();
         });
 
         // Navbar scroll effect
@@ -1818,7 +1691,8 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const href = this.getAttribute('href');
+                const target = href === '#' ? document.body : document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
@@ -1828,245 +1702,6 @@
             });
         });
 
-        // Chart.js Configuration
-        function getChartColors() {
-            const isDark = html.getAttribute('data-theme') === 'dark';
-            return {
-                text: isDark ? '#fafafa' : '#0c0a09',
-                textSecondary: isDark ? '#a1a1aa' : '#57534e',
-                grid: isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)',
-                accent: '#f59e0b',
-                accentSecondary: '#d97706',
-                chartColors: [
-                    'rgba(245, 158, 11, 0.9)',
-                    'rgba(217, 119, 6, 0.9)',
-                    'rgba(251, 191, 36, 0.9)',
-                    'rgba(180, 83, 9, 0.9)',
-                    'rgba(253, 224, 71, 0.9)',
-                    'rgba(146, 64, 14, 0.9)'
-                ]
-            };
-        }
-
-        function updateChartColors() {
-            const colors = getChartColors();
-            
-            // Update Language Chart
-            if (window.languageChart) {
-                window.languageChart.options.plugins.legend.labels.color = colors.text;
-                window.languageChart.update();
-            }
-            
-            // Update Skill Chart
-            if (window.skillChart) {
-                window.skillChart.options.scales.r.ticks.color = colors.textSecondary;
-                window.skillChart.options.scales.r.pointLabels.color = colors.text;
-                window.skillChart.options.scales.r.grid.color = colors.grid;
-                window.skillChart.update();
-            }
-            
-            // Update Experience Chart
-            if (window.experienceChart) {
-                window.experienceChart.options.scales.x.ticks.color = colors.textSecondary;
-                window.experienceChart.options.scales.y.ticks.color = colors.textSecondary;
-                window.experienceChart.options.scales.y.grid.color = colors.grid;
-                window.experienceChart.update();
-            }
-        }
-
-        // Initialize Charts
-        window.addEventListener('load', () => {
-            const colors = getChartColors();
-
-            // Language Proficiency Doughnut Chart
-            const ctx1 = document.getElementById('languageChart').getContext('2d');
-            window.languageChart = new Chart(ctx1, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Python', 'SQL', 'C++', 'R', 'JavaScript'],
-                    datasets: [{
-                        data: [45, 25, 15, 8, 7],
-                        backgroundColor: colors.chartColors,
-                        borderWidth: 0,
-                        hoverOffset: 10
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '60%',
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                color: colors.text,
-                                padding: 16,
-                                usePointStyle: true,
-                                pointStyle: 'circle'
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            padding: 12,
-                            cornerRadius: 8,
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.parsed}% usage`;
-                                }
-                            }
-                        }
-                    },
-                    animation: {
-                        animateRotate: true,
-                        animateScale: true,
-                        duration: 1500,
-                        easing: 'easeOutQuart'
-                    }
-                }
-            });
-
-            // Core Competencies Radar Chart
-            const ctx2 = document.getElementById('skillChart').getContext('2d');
-            window.skillChart = new Chart(ctx2, {
-                type: 'radar',
-                data: {
-                    labels: ['Data Engineering', 'Machine Learning', 'Data Analysis', 'Visualization', 'IoT/Hardware', 'Communication'],
-                    datasets: [{
-                        label: 'Proficiency',
-                        data: [90, 82, 88, 85, 75, 85],
-                        backgroundColor: 'rgba(245, 158, 11, 0.2)',
-                        borderColor: 'rgba(245, 158, 11, 1)',
-                        borderWidth: 2,
-                        pointBackgroundColor: 'rgba(245, 158, 11, 1)',
-                        pointBorderColor: '#fff',
-                        pointHoverRadius: 8,
-                        pointRadius: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                display: false
-                            },
-                            pointLabels: {
-                                color: colors.text,
-                                font: {
-                                    size: 11,
-                                    weight: '500'
-                                }
-                            },
-                            grid: {
-                                color: colors.grid
-                            },
-                            angleLines: {
-                                color: colors.grid
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            padding: 12,
-                            cornerRadius: 8,
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.parsed.r}%`;
-                                }
-                            }
-                        }
-                    },
-                    animation: {
-                        duration: 1500,
-                        easing: 'easeOutQuart'
-                    }
-                }
-            });
-
-            // Domain Expertise Bar Chart
-            const ctx3 = document.getElementById('experienceChart').getContext('2d');
-            window.experienceChart = new Chart(ctx3, {
-                type: 'bar',
-                data: {
-                    labels: ['Data Pipelines', 'ML Models', 'Databases', 'Visualization', 'Cloud', 'Version Control'],
-                    datasets: [{
-                        label: 'Experience Level',
-                        data: [90, 82, 88, 85, 65, 92],
-                        backgroundColor: [
-                            'rgba(245, 158, 11, 0.8)',
-                            'rgba(217, 119, 6, 0.8)',
-                            'rgba(251, 191, 36, 0.8)',
-                            'rgba(180, 83, 9, 0.8)',
-                            'rgba(253, 224, 71, 0.8)',
-                            'rgba(146, 64, 14, 0.8)'
-                        ],
-                        borderRadius: 8,
-                        borderSkipped: false
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y',
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            max: 100,
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                color: colors.textSecondary,
-                                callback: value => value + '%'
-                            }
-                        },
-                        y: {
-                            grid: {
-                                color: colors.grid
-                            },
-                            ticks: {
-                                color: colors.textSecondary,
-                                font: {
-                                    size: 11
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            padding: 12,
-                            cornerRadius: 8,
-                            callbacks: {
-                                label: function(context) {
-                                    return `Proficiency: ${context.parsed.x}%`;
-                                }
-                            }
-                        }
-                    },
-                    animation: {
-                        duration: 1500,
-                        easing: 'easeOutQuart'
-                    }
-                }
-            });
-        });
     </script>
 </body>
 </html>
