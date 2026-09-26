@@ -20,6 +20,7 @@ projects/<name>/        One folder per project
 2. Add `thumbnail.jpg` and any gallery images.
 3. Add an entry to the `projects` array in `projects.html`, with
    `folder: 'projects/<name>'` and the gallery file names in `images`.
+   Optional links: `githubLink`, `articleLink`, `liveLink`.
 
 ## Running locally
 

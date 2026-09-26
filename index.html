@@ -1216,6 +1216,7 @@
         .awards-grid { margin-top: 24px; }
         .skill-category-title { margin-bottom: 16px; }
 
+        .timeline-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
         .contact-links { display: flex; flex-wrap: wrap; gap: 12px; }
         .footer-location { display: block; }
     </style>
@@ -1254,8 +1255,8 @@
                         <span>Sydney, NSW</span>
                     </div>
                     <p class="hero-description">
-                        I build data pipelines and AI systems. At Continental AG I automated ETL pipelines
-                        that cut manual data processing by 95%. I now build AI tooling and deliver AI training
+                        I build data pipelines and AI systems. At Continental AG my automation cut manual
+                        data processing by 95%. I now build AI tooling and deliver AI training
                         at Western Sydney Tech Innovators.
                     </p>
                     <div class="hero-actions">
@@ -1300,9 +1301,8 @@
             </div>
             <div class="about-single reveal">
                 <p>
-                    I am a data engineer working on AI delivery in Sydney. At Western Sydney Tech Innovators
-                    I build workshops, training and the internal systems the organisation runs on, across its
-                    consultation, training and community programs.
+                    I am a data and AI engineer in Sydney. At Western Sydney Tech Innovators I design and
+                    deliver AI workshops, and build the internal systems the organisation runs on.
                 </p>
                 <p>
                     Before moving to Australia I spent a year on the ADAS team at Continental AG in India,
@@ -1335,11 +1335,20 @@
                             <span class="timeline-date">Apr 2026 to Present</span>
                         </div>
                         <ul class="timeline-achievements">
-                            <li>Deliver AI workshops and training for working professionals and community groups</li>
+                            <li>Design and deliver AI workshops and training for working professionals and community groups</li>
                             <li>Work across the consultation, training and community programs</li>
-                            <li>Five club engineers take delegation from me on delivery</li>
-                            <li>Built the internal tooling the organisation runs on, including its first automated reporting routine</li>
+                            <li>Lead five club engineers on workshop and event delivery</li>
+                            <li>Built the Claude Code workspace the organisation runs on, including agent skills, a shared memory system and its first automated reporting routine</li>
                         </ul>
+                        <div class="timeline-tags">
+                            <span class="skill-tag primary">Harness engineering</span>
+                            <span class="skill-tag primary">AI consulting</span>
+                            <span class="skill-tag">Claude Code</span>
+                            <span class="skill-tag">Notion</span>
+                            <span class="skill-tag">Google Workspace</span>
+                            <span class="skill-tag">Astro</span>
+                            <span class="skill-tag">Sanity</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1388,7 +1397,6 @@
                         <ul class="timeline-achievements">
                             <li>Processed and analysed datasets of more than 100,000 records using SQL and Python</li>
                             <li>Built reusable data cleaning and validation scripts that replaced manual spreadsheet work</li>
-                            <li>Produced data quality reports and visualisations for stakeholders</li>
                         </ul>
                     </div>
                 </div>
@@ -1428,19 +1436,19 @@
             </div>
             <div class="project-list reveal">
                 <a href="projects.html" class="project-item">
-                    <h3>Product recommendation system</h3>
-                    <p>Database schema, ETL pipeline and a collaborative filtering model.</p>
-                    <span class="project-stack">Python, SQL, scikit-learn, MySQL</span>
+                    <h3>WSTI website</h3>
+                    <p>The public website of Western Sydney Tech Innovators, with content managed in Sanity.</p>
+                    <span class="project-stack">Astro, Sanity</span>
+                </a>
+                <a href="projects.html" class="project-item">
+                    <h3>Event registrations to Notion</h3>
+                    <p>A daily cloud routine that updates Notion with registration counts from Eventbrite and Meetup.</p>
+                    <span class="project-stack">Claude Code, Eventbrite, Meetup, Notion</span>
                 </a>
                 <a href="projects.html" class="project-item">
                     <h3>Healthcare mobile application</h3>
                     <p>Backend data architecture and analytics for a symptom tracking and telemedicine app, with Johns Hopkins University.</p>
                     <span class="project-stack">Python, Firebase, ETL</span>
-                </a>
-                <a href="projects.html" class="project-item">
-                    <h3>Raspberry Pi network storage server</h3>
-                    <p>A self-hosted storage server on a Raspberry Pi 4 running Linux.</p>
-                    <span class="project-stack">Linux, shell scripting, SSH</span>
                 </a>
             </div>
             <div class="project-list-footer reveal">
@@ -1457,6 +1465,18 @@
             </div>
 
             <div class="skills-grid reveal">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">AI development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag primary">Claude Code</span>
+                        <span class="skill-tag primary">Harness engineering</span>
+                        <span class="skill-tag">Agent skills</span>
+                        <span class="skill-tag">Prompt engineering</span>
+                        <span class="skill-tag">Workflow automation</span>
+                        <span class="skill-tag">Ollama</span>
+                    </div>
+                </div>
+
                 <div class="skill-category">
                     <h3 class="skill-category-title">Languages</h3>
                     <div class="skill-tags">
@@ -1493,44 +1513,21 @@
                 </div>
 
                 <div class="skill-category">
-                    <h3 class="skill-category-title">AI development</h3>
+                    <h3 class="skill-category-title">Web</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag primary">Claude Code</span>
-                        <span class="skill-tag">Prompt engineering</span>
-                        <span class="skill-tag">Ollama</span>
+                        <span class="skill-tag primary">Astro</span>
+                        <span class="skill-tag primary">Sanity</span>
                     </div>
                 </div>
 
                 <div class="skill-category">
-                    <h3 class="skill-category-title">Visualisation</h3>
+                    <h3 class="skill-category-title">Cloud and tools</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag primary">Tableau</span>
-                        <span class="skill-tag">Power BI</span>
-                        <span class="skill-tag">Streamlit</span>
-                        <span class="skill-tag">Matplotlib</span>
-                        <span class="skill-tag">Seaborn</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3 class="skill-category-title">Cloud and infrastructure</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">AWS (S3, EC2)</span>
+                        <span class="skill-tag primary">GCP</span>
+                        <span class="skill-tag">Firebase</span>
                         <span class="skill-tag">Docker</span>
                         <span class="skill-tag">Git</span>
-                        <span class="skill-tag">Snowflake</span>
                         <span class="skill-tag">Linux</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3 class="skill-category-title">IoT and computer vision</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag primary">OpenCV</span>
-                        <span class="skill-tag">Raspberry Pi</span>
-                        <span class="skill-tag">Sensor integration</span>
-                        <span class="skill-tag">NaVIC GPS</span>
-                        <span class="skill-tag">Real-time processing</span>
                     </div>
                 </div>
             </div>
