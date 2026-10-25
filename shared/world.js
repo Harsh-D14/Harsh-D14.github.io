@@ -10,6 +10,13 @@
   // mine: highlighted in the accent colour. side: 'left' puts the label on the left of the pin.
   var PLACES = [
     { name: 'Sydney', tz: 'Australia/Sydney', lat: -33.87, lon: 151.21, mine: true },
+    { name: 'Canberra', tz: 'Australia/Sydney', lat: -35.28, lon: 149.13, side: 'left' },
+    { name: 'Melbourne', tz: 'Australia/Melbourne', lat: -37.81, lon: 144.96, side: 'left' },
+    { name: 'Brisbane', tz: 'Australia/Brisbane', lat: -27.47, lon: 153.03 },
+    { name: 'Hobart', tz: 'Australia/Hobart', lat: -42.88, lon: 147.33 },
+    { name: 'Adelaide', tz: 'Australia/Adelaide', lat: -34.93, lon: 138.60, side: 'left' },
+    { name: 'Perth', tz: 'Australia/Perth', lat: -31.95, lon: 115.86, side: 'left' },
+    { name: 'Darwin', tz: 'Australia/Darwin', lat: -12.46, lon: 130.84 },
     { name: 'Bengaluru', tz: 'Asia/Kolkata', lat: 12.97, lon: 77.59, mine: true },
     { name: 'Zurich', tz: 'Europe/Zurich', lat: 47.37, lon: 8.54, mine: true },
     { name: 'London', tz: 'Europe/London', lat: 51.51, lon: -0.13, side: 'left' },
@@ -76,11 +83,28 @@
     el.querySelector('b').textContent = p.name;
     pinsEl.appendChild(el);
     var li = document.createElement('li'); timesEl.appendChild(li);
-    return { el: el, time: el.querySelector('time'), li: li, v: vec(p.lat * DEG, p.lon * DEG), p: p, last: '', w: 0 };
+    return { el: el, time: el.querySelector('time'), lbl: el.querySelector('.lbl'), li: li, v: vec(p.lat * DEG, p.lon * DEG), p: p, last: '', w: 0, h: 0, dy: 0 };
   });
+  // Labels are placed highlighted cities first, then in list order. A label that would cover another
+  // label or a dot tries the other side, then half a label up or down, and if nothing fits it hides
+  // until there is room. Highlighted labels always show and only steer clear of other labels.
+  var labelOrder = pinEls.filter(function (q) { return q.p.mine; }).concat(pinEls.filter(function (q) { return !q.p.mine; }));
+  var NUDGE = [0, -12, 12];
+
+  function labelBox(q, left, dy) {
+    var x0 = left ? q.x - 10 - q.w : q.x + 10, y0 = q.y - 11 + dy;
+    return [x0 - 2, y0 - 2, x0 + q.w + 2, y0 + q.h + 2];
+  }
+  function hits(b, boxes, own) {
+    for (var i = 0; i < boxes.length; i++) {
+      var c = boxes[i];
+      if (c[4] !== own && b[0] < c[2] && b[2] > c[0] && b[1] < c[3] && b[3] > c[1]) return true;
+    }
+    return false;
+  }
 
   function updatePins(m, ms) {
-    var fade = 0.18;
+    var fade = 0.18, dots = [], labels = [];
     pinEls.forEach(function (q) {
       var s = globe.project(m, q.v), o = Math.max(0, Math.min(1, s.facing / fade));
       q.el.style.opacity = o.toFixed(2);
@@ -90,12 +114,30 @@
       if (t !== q.last) {
         q.last = t; q.time.textContent = t;
         q.li.textContent = q.p.name + ', ' + fmt[q.p.tz + 'd'].format(ms) + ' ' + t;
-        q.w = q.el.querySelector('.lbl').offsetWidth;
+        q.w = q.lbl.offsetWidth; q.h = q.lbl.offsetHeight;
       }
-      var left = q.p.side === 'left';
-      if (left && s.x - 10 - q.w < 8) left = false;
-      else if (!left && s.x + 10 + q.w > W - 8) left = true;
+      q.x = s.x; q.y = s.y; q.on = o > 0;
+      if (q.on) dots.push([s.x - 4, s.y - 4, s.x + 4, s.y + 4, q]);
+    });
+    labelOrder.forEach(function (q) {
+      if (!q.on) return;
+      var pref = q.p.side === 'left';
+      if (pref && q.x - 10 - q.w < 8) pref = false;
+      else if (!pref && q.x + 10 + q.w > W - 8) pref = true;
+      var left = pref, dy = 0, shown = false;
+      NUDGE.some(function (d) {
+        return [pref, !pref].some(function (side) {
+          var b = labelBox(q, side, d);
+          if (b[0] < 6 || b[2] > W - 6 || hits(b, labels, q) || (!q.p.mine && hits(b, dots, q))) return false;
+          left = side; dy = d; shown = true;
+          return true;
+        });
+      });
+      if (!shown && q.p.mine) shown = true;
+      if (shown) labels.push(labelBox(q, left, dy).concat(q));
+      if (q.dy !== dy) { q.dy = dy; q.lbl.style.top = (dy - 11) + 'px'; }
       q.el.classList.toggle('left', left);
+      q.el.classList.toggle('nolabel', !shown);
     });
   }
 
