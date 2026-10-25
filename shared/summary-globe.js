@@ -1,5 +1,5 @@
 /* Summary view background, dark theme only: the World view's sunlit Earth turning slowly behind the page.
-   The sun sits where it really is and the Earth turns through it as a slow time-lapse.
+   The Earth turns through the real sun as a slow time-lapse, starting from the last time Australia came round.
    Stops completely in the light theme, loads its imagery only after the page has loaded. */
 (function () {
   var E = window.HSMGlobe;
@@ -42,6 +42,14 @@
     lastSpace = 0;
   }
 
+  // The most recent moment, within the last day, when Australia sat `off` spreads from its spot.
+  // Starting the time-lapse there means every visit opens on Australia, not up to a day's turn away.
+  function australiaMoment(off) {
+    var now = Date.now(), lon = AU_LON + SUN_AZIMUTH - spot.phi - off * AU_SPREAD;   // the sun longitude that puts it there
+    var back = ((lon - E.subsolar(now).lon) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+    return now - back / (2 * Math.PI) * 86400000;
+  }
+
   function drawSpace(m, sunEF) {
     sctx.setTransform(1, 0, 0, 1, 0, 0);
     sctx.clearRect(0, 0, space.width, space.height);
@@ -76,10 +84,9 @@
     if (running || !globe.ready) return;
     running = true;
     root.classList.add('has-globe');
-    if (reduce) {                                  // one still frame of the real sunlight, refreshed each minute
-      simT = Date.now(); draw(performance.now());
+    if (reduce) {                                  // one still frame, with Australia in its spot
+      simT = australiaMoment(0); draw(performance.now());
       running = false;
-      clearTimeout(start.t); start.t = setTimeout(function () { if (dark()) { start(); } }, 60000);
       return;
     }
     last = performance.now(); raf = requestAnimationFrame(frame);
@@ -99,6 +106,7 @@
   }
 
   layout();
+  simT = australiaMoment(-0.8);                    // open with Australia already rising into view
   window.addEventListener('resize', function () { layout(); if (globe.ready && dark()) draw(performance.now()); });
   new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
   if (pageLoaded) sync();
