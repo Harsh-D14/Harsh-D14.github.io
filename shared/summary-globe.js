@@ -10,6 +10,12 @@
   var SUN_AZIMUTH = -2.0;          // sun behind and to the left: mostly night side with city lights, a thin sunlit crescent
   var PITCH = 0.32, ROLL = -0.409; // a little above the equator, axis tilted like a desk globe
   var FRAME_MS = 33;               // about 30 frames a second is plenty for a background
+  // Australia gets the spotlight: as it comes round, the camera eases down towards the southern hemisphere
+  // and the time-lapse slows so it lingers in the sunlit band, then both ease back. The sun stays true.
+  var AU_LON = 134 * E.DEG;        // centre of the continent
+  var AU_SPREAD = 45 * E.DEG;      // how far either side of the spot the tilt reaches
+  var AU_SLOW = 0.75;              // the time-lapse runs at a quarter speed with Australia in the spot
+  var spot = { phi: 0, pitch: 0 }; // where Australia should sit, set in layout() for wide or narrow screens
 
   var root = document.documentElement;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -18,6 +24,7 @@
   if (!globe.ok) return;
 
   var simT = Date.now(), last = 0, raf = 0, running = false, stars = null, lastSpace = 0, pageLoaded = document.readyState === 'complete';
+  var rate = 1, spacePitch = 0;
 
   function dark() { return root.getAttribute('data-theme') !== 'light'; }
 
@@ -27,6 +34,8 @@
     // a large Earth low on the right, clear of the hero text on the left
     var R = narrow ? W * 0.85 : Math.min(H * 0.62, W * 0.42);
     var CX = narrow ? W * 0.5 : W * 0.76, CY = narrow ? H * 0.98 : H * 0.8;
+    // wide: in the gap between the hero text and the profile card. narrow: top middle. Both on the dusk line.
+    spot = narrow ? { phi: -20 * E.DEG, pitch: -0.9 } : { phi: -30 * E.DEG, pitch: -0.45 };
     globe.layout(W, H, dpr, R, CX, CY);
     space.width = Math.round(W * dpr); space.height = Math.round(H * dpr);
     stars = E.stars(W, H, dpr, 0.12, 0.55);
@@ -42,9 +51,15 @@
   }
 
   function draw(now) {
-    var sp = E.subsolar(simT), sunEF = E.vec(sp.lat, sp.lon);
-    var m = E.model(SUN_AZIMUTH - sp.lon, PITCH, ROLL);
-    if (now - lastSpace > 5000) { drawSpace(m, sunEF); lastSpace = now; }   // the halo barely moves, redraw it rarely
+    var sp = E.subsolar(simT), sunEF = E.vec(sp.lat, sp.lon), theta = SUN_AZIMUTH - sp.lon;
+    var off = AU_LON + theta - spot.phi;                                     // how far Australia is from its spot
+    off = Math.atan2(Math.sin(off), Math.cos(off)) / AU_SPREAD;
+    var w = Math.exp(-off * off), pitch = PITCH + (spot.pitch - PITCH) * w;
+    rate = 1 - AU_SLOW * w * w;
+    var m = E.model(theta, pitch, ROLL);
+    if (now - lastSpace > 5000 || Math.abs(pitch - spacePitch) > 0.02) {   // the halo barely moves, redraw it rarely
+      drawSpace(m, sunEF); lastSpace = now; spacePitch = pitch;
+    }
     globe.draw(m, sunEF, 1);
   }
 
@@ -53,7 +68,7 @@
     raf = requestAnimationFrame(frame);
     if (now - last < FRAME_MS) return;
     var dt = Math.min(now - last, 100); last = now;
-    simT += dt * (86400 / DAY_SECONDS);
+    simT += dt * (86400 / DAY_SECONDS) * rate;
     draw(now);
   }
 
